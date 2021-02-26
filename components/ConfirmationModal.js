@@ -1,4 +1,4 @@
-import React from "../../_snowpack/pkg/react.js";
+import React from "../_snowpack/pkg/react.js";
 import styles from "./ConfirmationModal.module.css.proxy.js";
 export default function ConfirmationModal({resolver, rejecter}) {
   function validateConfirmHandler() {

@@ -1,9 +1,9 @@
-import React, {useState, useContext} from "../../_snowpack/pkg/react.js";
+import React, {useState, useContext} from "../_snowpack/pkg/react.js";
 import StepItem from "./StepItem.js";
 import WorkflowContext from "../WorkflowContext.js";
 import styles from "./Step.module.css.proxy.js";
-import {FontAwesomeIcon} from "../../_snowpack/pkg/@fortawesome/react-fontawesome.js";
-import {faBars, faWindowClose} from "../../_snowpack/pkg/@fortawesome/free-solid-svg-icons.js";
+import {FontAwesomeIcon} from "../_snowpack/pkg/@fortawesome/react-fontawesome.js";
+import {faBars, faWindowClose} from "../_snowpack/pkg/@fortawesome/free-solid-svg-icons.js";
 export default function Step(props) {
   const {type} = props;
   const {Title, StepDurationDays, WorkFlowTemplateStepItems, StepNumber} = props.stepJson || {};

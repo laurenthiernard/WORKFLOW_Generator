@@ -1,4 +1,4 @@
-import React, {useState} from "../../_snowpack/pkg/react.js";
+import React, {useState} from "../_snowpack/pkg/react.js";
 import styles from "./EditStepModal.module.css.proxy.js";
 export default function EditStepModal({viewportPosition, onUpdate, onClose, stepJson, stepJson: {Title, StepDurationDays}}) {
   const [title, setTitle] = useState(stepJson.Title);

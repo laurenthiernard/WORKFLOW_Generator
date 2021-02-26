@@ -1,8 +1,8 @@
-import React, {useContext} from "../../_snowpack/pkg/react.js";
+import React, {useContext} from "../_snowpack/pkg/react.js";
 import WorkflowContext from "../WorkflowContext.js";
 import styles from "./StepItem.module.css.proxy.js";
-import {FontAwesomeIcon} from "../../_snowpack/pkg/@fortawesome/react-fontawesome.js";
-import {faCog, faWindowClose} from "../../_snowpack/pkg/@fortawesome/free-solid-svg-icons.js";
+import {FontAwesomeIcon} from "../_snowpack/pkg/@fortawesome/react-fontawesome.js";
+import {faCog, faWindowClose} from "../_snowpack/pkg/@fortawesome/free-solid-svg-icons.js";
 export default function StepItem({stepItemJson: {Title, ItemOrder}, stepNumber}) {
   const context = useContext(WorkflowContext);
   function showEditStepItemHandler(pEvent) {

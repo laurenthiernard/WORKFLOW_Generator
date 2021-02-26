@@ -1,9 +1,9 @@
-import React from "../../_snowpack/pkg/react.js";
+import React from "../_snowpack/pkg/react.js";
 import Step from "./Step.js";
 import InterStep from "./InterStep.js";
 import styles from "./WorlkflowEditor.module.css.proxy.js";
-import {FontAwesomeIcon} from "../../_snowpack/pkg/@fortawesome/react-fontawesome.js";
-import {faGripLines} from "../../_snowpack/pkg/@fortawesome/free-solid-svg-icons.js";
+import {FontAwesomeIcon} from "../_snowpack/pkg/@fortawesome/react-fontawesome.js";
+import {faGripLines} from "../_snowpack/pkg/@fortawesome/free-solid-svg-icons.js";
 export default function WorlkflowEditor(props) {
   const {Title, WorkFlowTemplateSteps, TemplateLocked} = props.steps || {};
   const isWorkflowSelected = props.steps && Object.keys(props.steps).length > 0 && props.steps.constructor === Object;

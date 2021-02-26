@@ -1,4 +1,4 @@
-import React, {useState, useRef} from "../_snowpack/pkg/react.js";
+import React, {useState, useRef} from "./_snowpack/pkg/react.js";
 import "./App.css.proxy.js";
 import WorlkflowInterface from "./components/WorlkflowInterface.js";
 import WorlkflowEditor from "./components/WorlkflowEditor.js";
@@ -6,10 +6,10 @@ import ConfirmationModal from "./components/ConfirmationModal.js";
 import EditStepModal from "./components/EditStepModal.js";
 import EditStepItemModal from "./components/EditStepItemModal.js";
 import WorkflowContext from "./WorkflowContext.js";
-import SquareLoader from "../_snowpack/pkg/react-spinners/SquareLoader.js";
-import ReactJson from "../_snowpack/pkg/react-json-view.js";
-import {FontAwesomeIcon} from "../_snowpack/pkg/@fortawesome/react-fontawesome.js";
-import {faAngleUp, faAngleDown} from "../_snowpack/pkg/@fortawesome/free-solid-svg-icons.js";
+import SquareLoader from "./_snowpack/pkg/react-spinners/SquareLoader.js";
+import ReactJson from "./_snowpack/pkg/react-json-view.js";
+import {FontAwesomeIcon} from "./_snowpack/pkg/@fortawesome/react-fontawesome.js";
+import {faAngleUp, faAngleDown} from "./_snowpack/pkg/@fortawesome/free-solid-svg-icons.js";
 function App({}) {
   const [currentWorkflow, setCurrentWorkflow] = useState();
   const [isLoading, setIsLoading] = useState(false);

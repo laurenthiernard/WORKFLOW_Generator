@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from "../../_snowpack/pkg/react.js";
+import React, {useState, useEffect, useContext} from "../_snowpack/pkg/react.js";
 import WorkflowContext from "../WorkflowContext.js";
 export default function WorlkflowInterface(props) {
   const [workflows, setWorkflows] = useState([]);
