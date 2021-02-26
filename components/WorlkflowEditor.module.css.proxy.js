@@ -1,14 +1,35 @@
-
-export let code = "._WorkflowContainer_587si_1 {\n  width: 100%;\n  overflow-x: scroll;\n  overflow-y: hidden;\n  font-size: 14px;\n  display: flex;\n}\n\n._StepGroup_587si_9 {\n  position: relative;\n  display: flex;\n  flex-direction: column;\n  min-width: 220px;\n}\n\n._dragPanel_587si_16 {\n  display: flex;\n  margin: 3rem 0 1rem 0;\n}\n\n._newStep_587si_21 {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  cursor: pointer;\n  padding: 3px 0;\n  margin-right: 8px;\n  width: 40px;\n  background-color: darkgrey;\n  border-radius: 4px;\n  color: white;\n  height: unset;\n  pointer-events: unset;\n  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;\n}";
-let json = {"WorkflowContainer":"_WorkflowContainer_587si_1","StepGroup":"_StepGroup_587si_9","dragPanel":"_dragPanel_587si_16","newStep":"_newStep_587si_21"};
-export default json;
-
-// [snowpack] add styles to the page (skip if no document exists)
-if (typeof document !== 'undefined') {
-  const styleEl = document.createElement("style");
-  const codeEl = document.createTextNode(code);
-  styleEl.type = 'text/css';
-
-  styleEl.appendChild(codeEl);
-  document.head.appendChild(styleEl);
+export let code=`._components_WorlkflowEditor_module__WorkflowContainer {
+  width: 100%;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  font-size: 14px;
+  display: flex;
 }
+
+._components_WorlkflowEditor_module__StepGroup {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 220px;
+}
+
+._components_WorlkflowEditor_module__dragPanel {
+  display: flex;
+  margin: 3rem 0 1rem 0;
+}
+
+._components_WorlkflowEditor_module__newStep {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 3px 0;
+  margin-right: 8px;
+  width: 40px;
+  background-color: darkgrey;
+  border-radius: 4px;
+  color: white;
+  height: unset;
+  pointer-events: unset;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}`;let n={WorkflowContainer:"_components_WorlkflowEditor_module__WorkflowContainer",StepGroup:"_components_WorlkflowEditor_module__StepGroup",dragPanel:"_components_WorlkflowEditor_module__dragPanel",newStep:"_components_WorlkflowEditor_module__newStep"};export default n;const o=document.createElement("style"),e=document.createTextNode(code);o.type="text/css",o.appendChild(e),document.head.appendChild(o);
