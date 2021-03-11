@@ -5,7 +5,7 @@ export let code=`._dist_components_EditStepModal_module__EditStepModal_Container
 }
 ._dist_components_EditStepModal_module__EditStepModal_Header {
   background-color: #f1f1f1;
-  padding: 24px 24px 6px 24px;
+  padding: 16px 24px 6px 24px;
   border-radius: 4px 4px 0 0;
 }
 ._dist_components_EditStepModal_module__EditStepModal_Content {
@@ -17,7 +17,7 @@ export let code=`._dist_components_EditStepModal_module__EditStepModal_Container
 }
 ._dist_components_EditStepModal_module__EditStepModal_Footer {
   background-color: #f1f1f1;
-  padding: 24px;
+  padding: 16px 24px 24px 24px;
   border-radius: 0 0 4px 4px;
   display: flex;
 }

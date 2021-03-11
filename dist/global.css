@@ -57,6 +57,7 @@ a:visited {
 }
 .btn:disabled {
   background-color: #dfdfdf;
+  cursor: default !important;
 }
 
 .link-icon {

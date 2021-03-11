@@ -1,0 +1,136 @@
+.selectItem {
+  display: block;
+  cursor: pointer;
+  padding: 4px;
+}
+.selectItem:hover {
+  background-color: #5e94c0;
+}
+
+.selectedItem_delete {
+  padding: 0px 4px 0px 4px;
+  background-color: #d1d1d1;
+  border-radius: 3px;
+  margin-left: 9px;
+}
+.selectedItem_delete:hover {
+  background-color: #e6e6e6;
+}
+.selectedItem_delete:hover svg {
+  color: #424242;
+}
+.selectedItem_delete svg {
+  color: #818181;
+}
+
+.selectSearchable {
+  margin-bottom: 32px;
+}
+.selectSearchable_Container {
+  position: relative;
+  padding: 3px;
+  background-color: #ebebeb;
+  min-width: 150px;
+}
+.selectSearchable_SearchContainer {
+  position: relative;
+  width: 100%;
+  margin-bottom: 6px;
+}
+.selectSearchable_SearchContainer input[type=text] {
+  position: relative;
+  display: block;
+  background-color: white;
+  border-radius: 0;
+  box-sizing: border-box;
+  width: calc(100% - 45px);
+  border: none;
+  border-bottom: 1px solid black;
+  outline: none;
+  padding: 10px;
+}
+.selectSearchable_SearchContainer input[type=text]:focus {
+  outline: none;
+}
+.selectSearchable_SearchContainer svg {
+  position: relative;
+  float: right;
+  top: -23px;
+  left: -15px;
+  cursor: pointer;
+  color: black;
+  z-index: 20;
+}
+.selectSearchable_ItemsContainer {
+  height: 200px;
+  overflow: hidden;
+  overflow-y: scroll;
+  width: 100%;
+}
+.selectSearchable_Header {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  min-height: 34px;
+}
+.selectSearchable_SelectedContainer {
+  width: 100%;
+  background-color: white;
+  padding: 3px;
+  cursor: pointer;
+  display: flex;
+  flex-wrap: wrap;
+}
+.selectSearchable_Trigger {
+  background-color: #5e94c0;
+  color: white;
+  width: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.selectSearchable_SelectedItem {
+  background-color: #5e94c0;
+  color: white;
+  font-size: 0.8rem;
+  display: inline-block;
+  margin: 3px 2px 2px 0;
+  padding: 4px 8px;
+  border-radius: 3px;
+}
+.selectSearchable_SelectedItem_Selected {
+  margin: 2px 0;
+  background-color: #4981af;
+  color: white;
+}
+.selectSearchable_List {
+  position: relative;
+  display: block;
+  left: 0;
+  top: 37px;
+  font-size: 0.8rem;
+  z-index: 10;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  display: block;
+  padding: 10px;
+  background-color: #e6e6e6;
+  color: black;
+}
+
+.listCollapsed {
+  display: none;
+  overflow-y: auto;
+}
+
+.ListSmall {
+  width: 136px;
+}
+
+.ListMedium {
+  width: 290px;
+}
+
+.ListLarge {
+  width: 390px;
+}

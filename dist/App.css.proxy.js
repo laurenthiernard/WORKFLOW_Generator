@@ -57,6 +57,7 @@ a:visited {
 }
 .btn:disabled {
   background-color: #dfdfdf;
+  cursor: default !important;
 }
 
 .link-icon {
@@ -71,11 +72,16 @@ a:visited {
   background-color: #f0e9e9;
 }
 .App-header-content .templateSelect {
+  display: flex;
   padding: 0 0 0.5rem 0;
+  align-items: center;
 }
 .App-header-content .templateSelect select {
   width: 240px;
-  margin-top: 4px;
+  margin: 4px 24px 4px 12px;
+}
+.App-header-content .templateSelect button {
+  margin: 0 24px;
 }
 .App-main {
   padding: 12px;
@@ -90,6 +96,9 @@ a:visited {
 
 .actionBtns button {
   margin-left: 12px;
+}
+.actionBtns #showJson {
+  margin-left: 36px;
 }
 
 .controls {
@@ -115,6 +124,22 @@ a:visited {
 .react-json-view {
   margin-top: 3rem;
   padding: 2rem;
-  height: 400px;
+  height: 600px;
   overflow-y: scroll;
+}
+
+.tooltip {
+  position: relative;
+  top: -3px;
+  background-color: #5e94c0;
+  display: inline-block;
+  text-align: center;
+  width: 13px;
+  height: 13px;
+  font-size: 10px;
+  font-weight: bold;
+  border-radius: 50%;
+  color: snow;
+  margin-left: 2px;
+  cursor: help;
 }`,styleEl=document.createElement("style"),codeEl=document.createTextNode(code);styleEl.type="text/css",styleEl.appendChild(codeEl),document.head.appendChild(styleEl);

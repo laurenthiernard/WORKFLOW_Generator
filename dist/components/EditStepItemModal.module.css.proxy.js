@@ -1,11 +1,12 @@
 export let code=`._dist_components_EditStepItemModal_module__EditStepItemModal_Container {
   position: absolute;
-  min-width: 300px;
+  min-width: 450px;
+  max-width: 600px;
   z-index: 30;
 }
 ._dist_components_EditStepItemModal_module__EditStepItemModal_Header {
   background-color: #f1f1f1;
-  padding: 24px 24px 6px 24px;
+  padding: 16px 24px 6px 24px;
   border-radius: 4px 4px 0 0;
 }
 ._dist_components_EditStepItemModal_module__EditStepItemModal_Content {
@@ -17,7 +18,7 @@ export let code=`._dist_components_EditStepItemModal_module__EditStepItemModal_C
 }
 ._dist_components_EditStepItemModal_module__EditStepItemModal_Footer {
   background-color: #f1f1f1;
-  padding: 24px;
+  padding: 16px 24px 24px 24px;
   border-radius: 0 0 4px 4px;
   display: flex;
 }

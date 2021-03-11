@@ -1,36 +1,42 @@
-.ConfirmationModal_Container {
+.ConfigModal_Container {
   position: absolute;
-  min-width: 300px;
+  min-width: 440px;
   z-index: 30;
   left: calc(50vw - 150px);
   top: calc(70vh - 120px);
 }
-.ConfirmationModal_Header {
+.ConfigModal_Header {
   background-color: #f1f1f1;
   padding: 16px 24px 6px 24px;
   border-radius: 4px 4px 0 0;
 }
-.ConfirmationModal_Content {
+.ConfigModal_Content {
   background-color: #f1f1f1;
   padding: 0 24px 24px 24px;
 }
-.ConfirmationModal_Content_Row {
+.ConfigModal_Content_Row {
   padding: 6px 0 0 0;
 }
-.ConfirmationModal_Footer {
+.ConfigModal_Content_Row .title {
+  width: 100%;
+}
+.ConfigModal_Content_Row .projectDropdown {
+  width: 100%;
+}
+.ConfigModal_Footer {
   background-color: #f1f1f1;
   padding: 16px 24px 24px 24px;
   border-radius: 0 0 4px 4px;
   display: flex;
 }
-.ConfirmationModal_btnOK {
+.ConfigModal_btnOK {
   margin-left: auto;
   background-color: #4981af;
 }
-.ConfirmationModal_btnOK:hover {
+.ConfigModal_btnOK:hover {
   background-color: #5e94c0;
 }
-.ConfirmationModal_btnCancel {
+.ConfigModal_btnCancel {
   background-color: gray;
 }
 

@@ -7,7 +7,7 @@ export let code=`._dist_components_ConfirmationModal_module__ConfirmationModal_C
 }
 ._dist_components_ConfirmationModal_module__ConfirmationModal_Header {
   background-color: #f1f1f1;
-  padding: 6px 24px;
+  padding: 16px 24px 6px 24px;
   border-radius: 4px 4px 0 0;
 }
 ._dist_components_ConfirmationModal_module__ConfirmationModal_Content {
@@ -19,7 +19,7 @@ export let code=`._dist_components_ConfirmationModal_module__ConfirmationModal_C
 }
 ._dist_components_ConfirmationModal_module__ConfirmationModal_Footer {
   background-color: #f1f1f1;
-  padding: 12px 24px;
+  padding: 16px 24px 24px 24px;
   border-radius: 0 0 4px 4px;
   display: flex;
 }
