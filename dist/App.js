@@ -1,1 +1,496 @@
-import e,{useState as i,useRef as S}from"../web_modules/react.js";import"./App.css.proxy.js";import Z from"./components/WorlkflowInterface.js";import Y from"./components/WorlkflowEditor.js";import G from"./components/ConfirmationModal.js";import K from"./components/EditStepModal.js";import $ from"./components/EditStepItemModal.js";import ee from"./WorkflowContext.js";import p from"../web_modules/react-spinners/SquareLoader.js";import te from"../web_modules/react-json-view.js";import{FontAwesomeIcon as oe}from"../web_modules/@fortawesome/react-fontawesome.js";import{faAngleUp as le,faAngleDown as ae}from"../web_modules/@fortawesome/free-solid-svg-icons.js";function re({}){const[E,v]=i(!1),[t,s]=i(),[P,u]=i(!1),[c,W]=i(!1),[A,F]=i(null),[h,d]=i(!1),[I,k]=i(null),[N,w]=i(null),f=S(null),R=S(null),[g,b]=i([]),[T,O]=i([]),D={url:"https://api-uat.extrack.com/",token:"DOqpgMOE4kq9sSMGZTcdqttAe6ziej2_3lt98Qx6Qhze44r_ZzeIKAwZYmIOl-ldW_4H-vXWk6hf5_yQOp2UpZ2AShIO90cEfuzY8kXnN6LpL5SoL3eqPHdWCWB7gkatvCXBEwwGlsrauPB_hEEgk5Mvl99Mxiaai9QCg9_DOFSJX4naVoJoYEDl6tAPzOx3QydhB1z7C0LjrqLLQ_TzhBnfIjilFUZuvTfHaBZ3Suen9ItoUrTTenff3OLkY9A8wcxgm7Zn31ElcsTRaHp2NK0Spk3UcjD2VNXknWMH1XCTMhrnMbk5Gcry-O0yQ5v-pH7Zsl9tacLAx9vd8I9HnkZ7E0zaM8PoVJNBUWQiv-TRjWnV7zupcGYEOfbAw-tT2C2CC3iyBKPdrK7E9YEaJOuHDWrMe3jq8D7edpqKHRkTnLOmwLqpf2SXYY1At047Xp8P5-O0_pj2hCcyA-Py6Yl9iRjaOhOpJJobDJO72Bvt1N6oydAwSSq30rvxscpu8PKk_LgQZ0O5F9hMr0RSdlhLkuUVi8BBZDeQktfcP3piK60kOsrqja3yeBfFn5Yf8WsWbmrzz2Vqj3LFP16BCm3jjfNy0fZC0gomOxIR9P9mXzDDOVrv_03Vty68g9YoKXRgkmXj1-7vVHvhPdwQIjTUSEOIjWQa9ANpBxKvIhDYR-uioJV7Exc6ww5v_uSdeBBKU3g5VGAMiNFdDQMq25MGZcXbAvf98JVg73bmwqV-1KJeEfQLmMmEpKFPD0136_-ubZ_FjxnhubLBS5CfY5ySJ3dkxDhdJvbU-eMCTFpg-WdcQgS_0U12g9zJfxNwAjUje2aZI-h2_MBInoml5j86d6VtvOPdV4YiG50XoPEifSDiNttVTtfHcrNlENJiGWpSl8I4awGXe4sDXpBSvKTa4fZgM94ewl7eqOuLytVkedXZJ0giEL0oSkIMRL6cDAItIJLgdA0h5WeGqkXHsPhzwpgqsq3H55kY7W9T7TQ"};function y(o){console.log("----> Workflow: ",o),s(void 0),o!==void 0&&u(!0),setTimeout(()=>{s(o),u(!1)},400)}function j(o){o.preventDefault(),W(!c)}function U(o){switch(o.target.id){case"templateName":s({...t,Title:o.target.value});break;case"wfNote":s({...t,Message:o.target.value});break;default:break}}const B=o=>["InitiatorOptionsStart","IsAutoEscalated","IsSkipStepAllowed","IsDelegationAllowed","StepsDelegationOfAuthorityDependant"].includes(o);function _(o){const{id:l,name:a,value:r,type:n,checked:m}=o.target;B(a)?(console.log("🚀 changeCheckboxHandler: ",a,m),s({...t,[a]:m})):(console.log("🚀 changeRadioHandler: ",a,r),s({...t,[a]:r}))}function L(o){console.log("addStep at:",o);const l=[...t.WorkFlowTemplateSteps];l.map((a,r)=>({...a,StepNumber:r>=o?++a.StepNumber:a.StepNumber})),l.push(z(++o)),s({...t,WorkFlowTemplateSteps:l})}async function q(o){console.log("----> removeStep: ",o),d(!0);try{let l=await new Promise((r,n)=>{f.current=r,R.current=n});d(!1);const a=[...t.WorkFlowTemplateSteps].filter(r=>r.StepNumber!==o);a.map((r,n)=>({...r,StepNumber:++n>=o?--r.StepNumber:r.StepNumber})),s({...t,WorkFlowTemplateSteps:a})}catch(l){console.log("----> cancel",l),d(!1)}}function M(o,l){console.log("----> removeStepItem: ",o,l);const a=[...t.WorkFlowTemplateSteps[o-1].WorkFlowTemplateStepItems].filter(n=>n.ItemOrder!==l);a.map((n,m)=>({...n,StepNumber:++m>=l?--n.ItemOrder:n.ItemOrder}));const r=[...t.WorkFlowTemplateSteps];r[o-1].WorkFlowTemplateStepItems=a,s({...t,WorkFlowTemplateSteps:r})}function x(o){const l=[...t.WorkFlowTemplateSteps];l[o-1].WorkFlowTemplateStepItems.push(C(l[o-1].WorkFlowTemplateStepItems.length+1)),s({...t,WorkFlowTemplateSteps:l})}function J(o,l,a){const r=[...t.WorkFlowTemplateSteps];r[o-1].WorkFlowTemplateStepItems[l-1]=a,s({...t,WorkFlowTemplateSteps:r})}function V(o,l){console.log("----> step: ",o,l);const a=[...t.WorkFlowTemplateSteps];a[o-1]=l,s({...t,WorkFlowTemplateSteps:a})}function H(o,l){const a=t?.WorkFlowTemplateSteps.filter(r=>r.StepNumber===o)[0];k(e.createElement(K,{stepJson:a,onUpdate:r=>V(o,r),viewportPosition:l,onClose:()=>k(null)}))}function Q(o,l,a){const r=t?.WorkFlowTemplateSteps.filter(n=>n.StepNumber===o)[0].WorkFlowTemplateStepItems[l-1];w(e.createElement($,{stepItemJson:r,onUpdate:n=>J(o,l,n),viewportPosition:a,onClose:()=>w(null)}))}const z=o=>({WorkFlowTemplateGUID:t?.GUID,StepNumber:o,StepDurationDays:1,StepReminderDays:1,WorkFlowStepRequiredApprovalCode:"",Title:"New Step",IsInactive:!1,IsDeleted:!1,RowVersion:"AAAAAAAQLJw=",WorkFlowTemplateStepItems:[C(1)]}),C=o=>({WorkFlowTemplateGUID:t?.GUID,Title:"New StepItem",ItemOrder:o,IsInactive:!1,IsDeleted:!1,RowVersion:"AAAAAAAQLKE=",WorkFlowTemplateStepItemUsers:[],WorkFlowTemplateStepItemMemberPositionRoles:[]}),X=c&&e.createElement("div",{className:"form"},e.createElement("div",{className:"controls"},e.createElement("div",{className:"labels"},"Workflow Title:"),e.createElement("div",{className:"forms"},e.createElement("input",{type:"text",name:"templateName",id:"templateName",value:t?.Title,onChange:U,disabled:t?.TemplateLocked}))),e.createElement("div",{className:"controls"},e.createElement("div",{className:"labels"},"Steps DOA Dependant:"),e.createElement("div",{className:"forms",onChange:_},e.createElement("div",null,e.createElement("input",{type:"checkbox",name:"StepsDelegationOfAuthorityDependant",id:"StepsDelegationOfAuthorityDependant",defaultChecked:t?.StepsDelegationOfAuthorityDependant===!0,disabled:!0})))),e.createElement("div",{className:"controls"},e.createElement("div",{className:"labels"},"Workflow Message",e.createElement("br",null),"(Sent to Users): "),e.createElement("div",{className:"forms"},e.createElement("textarea",{name:"wfNote",id:"wfNote",cols:60,rows:8,value:t?.Message,onChange:U,disabled:t?.TemplateLocked}))),e.createElement("div",{className:"controls"},e.createElement("div",{className:"labels"},"Workflow Outcome Decided By:"),e.createElement("div",{className:"forms",onChange:_},e.createElement("div",{className:"forms-row"},e.createElement("input",{type:"radio",name:"WorkFlowOutcomeDecidedByCode",id:"WorkFlowOutcomeDecidedByCodeA",value:"A",defaultChecked:t?.WorkFlowOutcomeDecidedByCode==="A",disabled:t?.TemplateLocked}),e.createElement("label",{htmlFor:"WorkFlowOutcomeDecidedByCodeA"},"Final step outcome")),e.createElement("div",{className:"forms-row"},e.createElement("input",{type:"radio",name:"WorkFlowOutcomeDecidedByCode",id:"WorkFlowOutcomeDecidedByCodeB",value:"B",defaultChecked:t?.WorkFlowOutcomeDecidedByCode==="B",disabled:t?.TemplateLocked}),e.createElement("label",{htmlFor:"WorkFlowOutcomeDecidedByCodeB"},"Lowest of all step outcomes")))),e.createElement("div",{className:"controls"},e.createElement("div",{className:"labels"},"Step Approvals Required:"),e.createElement("div",{className:"forms",onChange:_},e.createElement("div",{className:"forms-row"},e.createElement("input",{type:"radio",name:"WorkFlowStepRequiredApprovalCode",id:"WorkFlowStepRequiredApprovalCodeA",value:"A",defaultChecked:t?.WorkFlowStepRequiredApprovalCode==="A",disabled:t?.TemplateLocked}),e.createElement("label",{htmlFor:"WorkFlowStepRequiredApprovalCodeA"},"All step items completed")),e.createElement("div",{className:"forms-row"},e.createElement("input",{type:"radio",name:"WorkFlowStepRequiredApprovalCode",id:"WorkFlowStepRequiredApprovalCodeB",value:"B",defaultChecked:t?.WorkFlowStepRequiredApprovalCode==="B",disabled:t?.TemplateLocked}),e.createElement("label",{htmlFor:"WorkFlowStepRequiredApprovalCodeB"},"Any step item completed")),e.createElement("div",{className:"forms-row"},e.createElement("input",{type:"radio",name:"WorkFlowStepRequiredApprovalCode",id:"WorkFlowStepRequiredApprovalCodeC",value:"C",defaultChecked:t?.WorkFlowStepRequiredApprovalCode==="C",disabled:t?.TemplateLocked}),e.createElement("label",{htmlFor:"WorkFlowStepRequiredApprovalCodeC"},"All step items unless rejected")))),e.createElement("div",{className:"controls"},e.createElement("div",{className:"labels"},"Initiator Options-Start:"),e.createElement("div",{className:"forms",onChange:_},e.createElement("div",{className:"forms-row"},e.createElement("input",{type:"checkbox",name:"InitiatorOptionsStart",id:"InitiatorOptionsStart",defaultChecked:t?.InitiatorOptionsStart===!0,disabled:t?.TemplateLocked}),e.createElement("label",{htmlFor:"InitiatorOptionsStart"},"When starting a workflow: Initiator can edit step durations, roles and participants")))),e.createElement("div",{className:"controls"},e.createElement("div",{className:"labels"},"Initiator Options-During:"),e.createElement("div",{className:"forms",onChange:_},e.createElement("div",{className:"forms-row"},e.createElement("input",{type:"radio",name:"WorkFlowInitiatorOptionsCode",id:"WorkFlowInitiatorOptionsCodeA",value:"A",defaultChecked:t?.WorkFlowInitiatorOptionsCode==="A",disabled:t?.TemplateLocked}),e.createElement("label",{htmlFor:"WorkFlowInitiatorOptionsCodeA"},"While workflow in progress Initiator can edit step participants")),e.createElement("div",{className:"forms-row"},e.createElement("input",{type:"radio",name:"WorkFlowInitiatorOptionsCode",id:"WorkFlowInitiatorOptionsCodeB",value:"B",defaultChecked:t?.WorkFlowInitiatorOptionsCode==="B",disabled:t?.TemplateLocked}),e.createElement("label",{htmlFor:"WorkFlowInitiatorOptionsCodeB"},"While workflow in progress Initiator can skip steps")),e.createElement("div",{className:"forms-row"},e.createElement("input",{type:"radio",name:"WorkFlowInitiatorOptionsCode",id:"WorkFlowInitiatorOptionsCodeC",value:"C",defaultChecked:t?.WorkFlowInitiatorOptionsCode==="C",disabled:t?.TemplateLocked}),e.createElement("label",{htmlFor:"WorkFlowInitiatorOptionsCodeC"},"No Options")),e.createElement("div",{className:"forms-row"},e.createElement("input",{type:"radio",name:"WorkFlowInitiatorOptionsCode",id:"WorkFlowInitiatorOptionsCodeD",value:"D",defaultChecked:t?.WorkFlowInitiatorOptionsCode==="D",disabled:t?.TemplateLocked}),e.createElement("label",{htmlFor:"WorkFlowInitiatorOptionsCodeD"},"Initiator Can Stop Workflow")))),e.createElement("div",{className:"controls"},e.createElement("div",{className:"labels"},"On Rejection:"),e.createElement("div",{className:"forms",onChange:_},e.createElement("div",{className:"forms-row"},e.createElement("input",{type:"radio",name:"WorkFlowRejectionActionCode",id:"WorkFlowRejectionActionCodeA",value:"A",defaultChecked:t?.WorkFlowRejectionActionCode==="A",disabled:t?.TemplateLocked}),e.createElement("label",{htmlFor:"WorkFlowRejectionActionCodeA"},"Continue to next step")),e.createElement("div",{className:"forms-row"},e.createElement("input",{type:"radio",name:"WorkFlowRejectionActionCode",id:"WorkFlowRejectionActionCodeB",value:"B",defaultChecked:t?.WorkFlowRejectionActionCode==="B",disabled:t?.TemplateLocked}),e.createElement("label",{htmlFor:"WorkFlowRejectionActionCodeB"},"Back to workflow intiator")),e.createElement("div",{className:"forms-row"},e.createElement("input",{type:"radio",name:"WorkFlowRejectionActionCode",id:"WorkFlowRejectionActionCodeC",value:"C",defaultChecked:t?.WorkFlowRejectionActionCode==="C",disabled:t?.TemplateLocked}),e.createElement("label",{htmlFor:"WorkFlowRejectionActionCodeC"},"Reset and send back to previous step")))),e.createElement("div",{className:"controls"},e.createElement("div",{className:"labels"},"Is Auto Escalated:"),e.createElement("div",{className:"forms",onChange:_},e.createElement("div",null,e.createElement("input",{type:"checkbox",name:"IsAutoEscalated",id:"IsAutoEscalated",defaultChecked:t?.IsAutoEscalated===!0,disabled:t?.TemplateLocked})))),e.createElement("div",{className:"controls"},e.createElement("div",{className:"labels"},"Is Skip Step Allowed:"),e.createElement("div",{className:"forms",onChange:_},e.createElement("div",null,e.createElement("input",{type:"checkbox",name:"IsSkipStepAllowed",id:"IsSkipStepAllowed",defaultChecked:t?.IsSkipStepAllowed===!0,disabled:t?.TemplateLocked})))),e.createElement("div",{className:"controls"},e.createElement("div",{className:"labels"},"Is Delegation Allowed:"),e.createElement("div",{className:"forms",onChange:_},e.createElement("div",null,e.createElement("input",{type:"checkbox",name:"IsDelegationAllowed",id:"IsDelegationAllowed",defaultChecked:t?.IsDelegationAllowed===!0,disabled:t?.TemplateLocked})))));return e.createElement(ee.Provider,{value:{addStep:L,removeStep:q,addStepItem:x,removeStepItem:M,editStep:H,editStepItem:Q,apiConfig:D,currentWorkflow:t,doa:g,setDoa:b,contacts:T,setContacts:O,currentProjectId:A,setCurrentProjectId:F,showJson:E,setShowJson:v}},e.createElement("div",{className:"App"},e.createElement("header",{className:"App-header"},e.createElement(Z,{onChangeTemplate:y})),e.createElement("main",{className:"App-main"},t!==void 0&&e.createElement("p",null,e.createElement("a",{href:"#",onClick:j},e.createElement(oe,{icon:c?ae:le,className:"link-icon"}),c?"hide":"show"," config")),P?e.createElement("div",{className:"pageSpinners"},e.createElement(p,{size:10,color:"#EEE"}),e.createElement(p,{size:10,color:"#EEE"}),e.createElement(p,{size:10,color:"#EEE"})):X,e.createElement(Y,{steps:t}),t!==void 0&&E&&e.createElement(te,{src:t,theme:"monokai",displayDataTypes:!1,iconStyle:"square",enableClipboard:!1})),h&&e.createElement(G,{resolver:f.current,rejecter:R.current}),I,N))}export default re;
+import * as __SNOWPACK_ENV__ from '../_snowpack/env.js';
+
+import React, {useState, useRef} from "../_snowpack/pkg/react.js";
+import "./App.css.proxy.js";
+import WorlkflowInterface from "./components/WorlkflowInterface.js";
+import WorlkflowEditor from "./components/WorlkflowEditor.js";
+import ConfirmationModal from "./components/ConfirmationModal.js";
+import EditStepModal from "./components/EditStepModal.js";
+import EditStepItemModal from "./components/EditStepItemModal.js";
+import WorkflowContext from "./WorkflowContext.js";
+import SquareLoader from "../_snowpack/pkg/react-spinners/SquareLoader.js";
+import ReactJson from "../_snowpack/pkg/react-json-view.js";
+import {FontAwesomeIcon} from "../_snowpack/pkg/@fortawesome/react-fontawesome.js";
+import {faAngleUp, faAngleDown} from "../_snowpack/pkg/@fortawesome/free-solid-svg-icons.js";
+import {v4 as uuidv4} from "../_snowpack/pkg/uuid.js";
+function App({}) {
+  const [showJson, setShowJson] = useState(false);
+  const [currentWorkflow, setCurrentWorkflow] = useState();
+  const [isLoading, setIsLoading] = useState(false);
+  const [showConfig, setShowConfig] = useState(false);
+  const [currentProjectId, setCurrentProjectId] = useState(window["SelectedProject"]);
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+  const [editStepModal, setEditStepModal] = useState(null);
+  const [editStepItemModal, setEditStepItemModal] = useState(null);
+  const confirmationResolver = useRef(null);
+  const confirmationRejecter = useRef(null);
+  const [doa, setDoa] = useState([]);
+  const [contacts, setContacts] = useState([]);
+  const apiConfig = __SNOWPACK_ENV__.MODE === "production" ? {
+    env: "prod",
+    url: "/api/",
+    token: "",
+    templatesStem: "WorkFlowTemplate/Templates",
+    templateSaveStem: "WorkFlowTemplate",
+    templateStem: "",
+    projectsStem: "Project/Load",
+    doaStem: "WorkFlowDelegationOfAuthority/Load",
+    contactStem: `ProjectContact/DetailedContactByProject?RootProjectId=${currentProjectId}`
+  } : {
+    env: "dev",
+    url: "https://api-uat.extrack.com/",
+    token: "xWnqHpztGPmGHDQXSCglhlHbJWjBpL3rH0RPIorj3xwfRZI7DOcNJe2bnDQ-KmKk-Lbh22fLryy2Q8pombI-6CXX1mDcs9frT1bHHUUkbdrOywVGYrQUDGlrGRUPLNAft8r9hFNIKvirtYU0wgUVMjfKaprobCLcL3cmoiDxsNe9CuTIW7JL1gh-kwqEwufPE7BGdr82wGaOHFlrlhpQVUBhM49KYfO2mIXdWGZtRgfIx6maMY-4X0HI27NVqu6EWnITa3br7Mxt4kWFMR3A9m0vRAh4439xzO_P6x_06LaVQR3lTUPGZpQymSWR6VWNpf1BCgdSoHndW9cxwi2HvgBQA5Rbi-oMhfMx8rHcp3NTuXIAaLUGcFaYh8N0ATdQir3b_YdCKm3ZhIQZog4zwEDTy51sbLJu4YveDLC7qCVDQpyum2lv7ST3h-Or7mvz9X06uAj1VH0EfmS9fc2n6kCWjqFFsMxVDfQ5LlmGyp5R84PkdxfpfkMDP6Ov3v1TD-I7EAlmTPnn4oDnbDih4XpqyyJYxdUvZsHsFHh_LbFHXVMVeHgdiabXfOFzzoAfmN06WtaJsDaMsv4Wd1oD7aiq89QQ1a9la3pS49F9JkH7Si-o8uet2c99ksXIoRPTewdwLuDFYDNFw8WEjYSkGwHAXt76oM4sxR9SMZ-O4W9fOBdzIs3QXOHxxQA7w093_kbMECml9LnHfPW1l8uvFgwArn3fExXmoef3J0KXj0pH2Yp3Cyo8pMzLhPMoNoldVKRYUZnBksXUdzt0KJh7jA7_8NURfFQI4PVs70ouphhmcPWviVcalkLOVPbgO4OFVWSBu50Lf3HPl6VAl0eiq-ZWnxNf11OWHyDPggYExaFEHx3q1BnZ6qV7tGYjcBKu5Y5OZlfUoHo8Z-xjXujzEMIGFPQBFl8_XBPCKng4BrPV-h_NcMfsqy0dAPcpojkq-hKsw6J2_kDK386ovG_acpFF4UeeSU_QAleC4xt-JttBoZ_z_aJJsjtNmrSUUI8Y6VrQkNHhzbA0IIfozAB9BfhY71ATrJmb543jeYsI7qVzfLmcYcPOu377E8rZ7dW0kHkRu6_zaP2PcM_yqugouQ",
+    templatesStem: "V1.0/WorkFlow/Templates",
+    templateSaveStem: "V1.0/WorkFlow/Template",
+    templateStem: "",
+    projectsStem: "V1.0/Project",
+    doaStem: "V1.0/WorkFlow/DelegationOfAuthority",
+    contactStem: `V1.0/Project/${currentProjectId}/Directory/Contacts`
+  };
+  function changeTemplateHandler(pWorkflow) {
+    setCurrentWorkflow(void 0);
+    if (pWorkflow !== void 0)
+      setIsLoading(true);
+    setTimeout(() => {
+      console.log("---> Set template: ", pWorkflow);
+      setCurrentWorkflow(pWorkflow);
+      setIsLoading(false);
+    }, 400);
+  }
+  function clickToggleShowConfig(pEvent) {
+    pEvent.preventDefault();
+    setShowConfig(!showConfig);
+  }
+  function changeTextHandler(pEvent) {
+    switch (pEvent.target.id) {
+      case "templateName":
+        setCurrentWorkflow({...currentWorkflow, Title: pEvent.target.value});
+        break;
+      case "wfNote":
+        setCurrentWorkflow({...currentWorkflow, Message: pEvent.target.value});
+        break;
+      default:
+        break;
+    }
+  }
+  const isCheckbox = (propName) => [
+    "InitiatorOptionsStart",
+    "IsAutoEscalated",
+    "IsSkipStepAllowed",
+    "IsDelegationAllowed",
+    "StepsDelegationOfAuthorityDependant"
+  ].includes(propName);
+  function changeRadioHandler(pEvent) {
+    const {id, name, value, type, checked} = pEvent.target;
+    if (isCheckbox(name)) {
+      console.log("\u{1F680} changeCheckboxHandler: ", name, checked);
+      setCurrentWorkflow({...currentWorkflow, [name]: checked});
+    } else {
+      console.log("\u{1F680} changeRadioHandler: ", name, value);
+      setCurrentWorkflow({...currentWorkflow, [name]: value});
+    }
+  }
+  function addStep(pStep) {
+    console.log("addStep at:", pStep, "currentWorkflow: ", currentWorkflow.WorkFlowTemplateSteps);
+    const templateStepsToUpdate = [...currentWorkflow.WorkFlowTemplateSteps];
+    templateStepsToUpdate.map((step, index) => {
+      return {...step, StepNumber: index >= pStep ? ++step.StepNumber : step.StepNumber};
+    });
+    templateStepsToUpdate.push(getNewStep(++pStep));
+    console.log("----> templateStepsToUpdate: ", templateStepsToUpdate);
+    setCurrentWorkflow({...currentWorkflow, WorkFlowTemplateSteps: templateStepsToUpdate});
+  }
+  async function removeStep(pStep) {
+    console.log("----> removeStep: ", pStep);
+    setShowConfirmationModal(true);
+    try {
+      let confirmation = await new Promise((resolve, reject) => {
+        confirmationResolver.current = resolve;
+        confirmationRejecter.current = reject;
+      });
+      setShowConfirmationModal(false);
+      const stepToUpdate = [...currentWorkflow.WorkFlowTemplateSteps].filter((step) => step.StepNumber === pStep)[0];
+      stepToUpdate.IsDeleted = true;
+      stepToUpdate.StepNumber = 0;
+      const templateStepsToUpdate = [...currentWorkflow.WorkFlowTemplateSteps].filter((step) => step.StepNumber !== -1);
+      templateStepsToUpdate.map((step, index) => {
+        return {...step, StepNumber: ++index >= pStep ? --step.StepNumber : step.StepNumber};
+      });
+      setCurrentWorkflow({...currentWorkflow, WorkFlowTemplateSteps: templateStepsToUpdate});
+    } catch (e) {
+      setShowConfirmationModal(false);
+    }
+  }
+  function removeStepItem(pStepPos, pStepItemPos) {
+    console.log("----> removeStepItem: ", pStepPos, pStepItemPos);
+    const templateStepItemsToUpdate = [...currentWorkflow.WorkFlowTemplateSteps[pStepPos - 1].WorkFlowTemplateStepItems].filter((stepItem) => stepItem.ItemOrder !== pStepItemPos);
+    templateStepItemsToUpdate.map((stepItem, index) => {
+      return {...stepItem, StepNumber: ++index >= pStepItemPos ? --stepItem.ItemOrder : stepItem.ItemOrder};
+    });
+    const templateStepsToUpdate = [...currentWorkflow.WorkFlowTemplateSteps];
+    templateStepsToUpdate[pStepPos - 1].WorkFlowTemplateStepItems = templateStepItemsToUpdate;
+    setCurrentWorkflow({...currentWorkflow, WorkFlowTemplateSteps: templateStepsToUpdate});
+  }
+  function addStepItem(pStep) {
+    const templateStepsToUpdate = [...currentWorkflow.WorkFlowTemplateSteps];
+    templateStepsToUpdate[pStep - 1].WorkFlowTemplateStepItems.push(getNewStepItem(templateStepsToUpdate[pStep - 1].WorkFlowTemplateStepItems.length + 1));
+    setCurrentWorkflow({...currentWorkflow, WorkFlowTemplateSteps: templateStepsToUpdate});
+  }
+  function updateStepItem(pStepNumber, pStepItemNumber, pJson) {
+    const templateStepsToUpdate = [...currentWorkflow.WorkFlowTemplateSteps];
+    templateStepsToUpdate[pStepNumber - 1].WorkFlowTemplateStepItems[pStepItemNumber - 1] = pJson;
+    setCurrentWorkflow({...currentWorkflow, WorkFlowTemplateSteps: templateStepsToUpdate});
+  }
+  function updateStep(pStepNumber, pJson) {
+    const templateStepsToUpdate = [...currentWorkflow.WorkFlowTemplateSteps].map((step, index) => {
+      return {...step, IsDraft: step.StepNumber > pStepNumber && !pJson.IsDraft ? false : step.IsDraft};
+    });
+    templateStepsToUpdate[pStepNumber - 1] = pJson;
+    setCurrentWorkflow({...currentWorkflow, WorkFlowTemplateSteps: templateStepsToUpdate});
+  }
+  function editStep(pStepNumber, pModalPos) {
+    const currentStep = currentWorkflow?.WorkFlowTemplateSteps.filter((step) => step.StepNumber === pStepNumber)[0];
+    setEditStepModal(/* @__PURE__ */ React.createElement(EditStepModal, {
+      stepJson: currentStep,
+      onUpdate: (json) => updateStep(pStepNumber, json),
+      viewportPosition: pModalPos,
+      onClose: () => setEditStepModal(null)
+    }));
+  }
+  function editStepItem(pStepNumber, pStepItemNumber, pModalPos) {
+    const currentStepItem = currentWorkflow?.WorkFlowTemplateSteps.filter((step) => step.StepNumber === pStepNumber)[0].WorkFlowTemplateStepItems[pStepItemNumber - 1];
+    setEditStepItemModal(/* @__PURE__ */ React.createElement(EditStepItemModal, {
+      stepItemJson: currentStepItem,
+      onUpdate: (json) => updateStepItem(pStepNumber, pStepItemNumber, json),
+      viewportPosition: pModalPos,
+      onClose: () => setEditStepItemModal(null)
+    }));
+  }
+  const getNewStep = (stepPos) => {
+    return {
+      GUID: uuidv4(),
+      WorkFlowTemplateGUID: currentWorkflow?.GUID,
+      StepNumber: stepPos,
+      StepDurationDays: 1,
+      StepReminderDays: 1,
+      WorkFlowStepRequiredApprovalCode: "A",
+      Title: "New Step",
+      IsInactive: false,
+      IsDeleted: false,
+      RowVersion: "AAAAAAAQLJw=",
+      WorkFlowTemplateStepItems: [getNewStepItem(1)]
+    };
+  };
+  const getNewStepItem = (stepItemPos) => {
+    return {
+      WorkFlowTemplateGUID: currentWorkflow?.GUID,
+      Title: "New StepItem",
+      ItemOrder: stepItemPos,
+      IsInactive: false,
+      IsDeleted: false,
+      RowVersion: "AAAAAAAQLKE=",
+      WorkFlowTemplateStepItemUsers: [],
+      WorkFlowTemplateStepItemMemberPositionRoles: []
+    };
+  };
+  const configForm = showConfig && /* @__PURE__ */ React.createElement("div", {
+    className: "form"
+  }, /* @__PURE__ */ React.createElement("div", {
+    className: "controls"
+  }, /* @__PURE__ */ React.createElement("div", {
+    className: "labels"
+  }, "Workflow Title:"), /* @__PURE__ */ React.createElement("div", {
+    className: "forms"
+  }, /* @__PURE__ */ React.createElement("input", {
+    type: "text",
+    name: "templateName",
+    id: "templateName",
+    value: currentWorkflow?.Title,
+    onChange: changeTextHandler,
+    disabled: currentWorkflow?.TemplateLocked
+  }))), /* @__PURE__ */ React.createElement("div", {
+    className: "controls"
+  }, /* @__PURE__ */ React.createElement("div", {
+    className: "labels"
+  }, "Steps DOA Dependant:"), /* @__PURE__ */ React.createElement("div", {
+    className: "forms",
+    onChange: changeRadioHandler
+  }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("input", {
+    type: "checkbox",
+    name: "StepsDelegationOfAuthorityDependant",
+    id: "StepsDelegationOfAuthorityDependant",
+    defaultChecked: currentWorkflow?.StepsDelegationOfAuthorityDependant === true,
+    disabled: true
+  })))), /* @__PURE__ */ React.createElement("div", {
+    className: "controls"
+  }, /* @__PURE__ */ React.createElement("div", {
+    className: "labels"
+  }, "Workflow Message", /* @__PURE__ */ React.createElement("br", null), "(Sent to Users):\xA0"), /* @__PURE__ */ React.createElement("div", {
+    className: "forms"
+  }, /* @__PURE__ */ React.createElement("textarea", {
+    name: "wfNote",
+    id: "wfNote",
+    cols: 60,
+    rows: 8,
+    value: currentWorkflow?.Message,
+    onChange: changeTextHandler,
+    disabled: currentWorkflow?.TemplateLocked
+  }))), /* @__PURE__ */ React.createElement("div", {
+    className: "controls"
+  }, /* @__PURE__ */ React.createElement("div", {
+    className: "labels"
+  }, "Workflow Outcome Decided By:"), /* @__PURE__ */ React.createElement("div", {
+    className: "forms",
+    onChange: changeRadioHandler
+  }, /* @__PURE__ */ React.createElement("div", {
+    className: "forms-row"
+  }, /* @__PURE__ */ React.createElement("input", {
+    type: "radio",
+    name: "WorkFlowOutcomeDecidedByCode",
+    id: "WorkFlowOutcomeDecidedByCodeA",
+    value: "A",
+    defaultChecked: currentWorkflow?.WorkFlowOutcomeDecidedByCode === "A",
+    disabled: currentWorkflow?.TemplateLocked
+  }), /* @__PURE__ */ React.createElement("label", {
+    htmlFor: "WorkFlowOutcomeDecidedByCodeA"
+  }, "Final step outcome")), /* @__PURE__ */ React.createElement("div", {
+    className: "forms-row"
+  }, /* @__PURE__ */ React.createElement("input", {
+    type: "radio",
+    name: "WorkFlowOutcomeDecidedByCode",
+    id: "WorkFlowOutcomeDecidedByCodeB",
+    value: "B",
+    defaultChecked: currentWorkflow?.WorkFlowOutcomeDecidedByCode === "B",
+    disabled: currentWorkflow?.TemplateLocked
+  }), /* @__PURE__ */ React.createElement("label", {
+    htmlFor: "WorkFlowOutcomeDecidedByCodeB"
+  }, "Lowest of all step outcomes")))), /* @__PURE__ */ React.createElement("div", {
+    className: "controls"
+  }, /* @__PURE__ */ React.createElement("div", {
+    className: "labels"
+  }, "Step Approvals Required:"), /* @__PURE__ */ React.createElement("div", {
+    className: "forms",
+    onChange: changeRadioHandler
+  }, /* @__PURE__ */ React.createElement("div", {
+    className: "forms-row"
+  }, /* @__PURE__ */ React.createElement("input", {
+    type: "radio",
+    name: "WorkFlowStepRequiredApprovalCode",
+    id: "WorkFlowStepRequiredApprovalCodeA",
+    value: "A",
+    defaultChecked: currentWorkflow?.WorkFlowStepRequiredApprovalCode === "A",
+    disabled: currentWorkflow?.TemplateLocked
+  }), /* @__PURE__ */ React.createElement("label", {
+    htmlFor: "WorkFlowStepRequiredApprovalCodeA"
+  }, "All step items completed")), /* @__PURE__ */ React.createElement("div", {
+    className: "forms-row"
+  }, /* @__PURE__ */ React.createElement("input", {
+    type: "radio",
+    name: "WorkFlowStepRequiredApprovalCode",
+    id: "WorkFlowStepRequiredApprovalCodeB",
+    value: "B",
+    defaultChecked: currentWorkflow?.WorkFlowStepRequiredApprovalCode === "B",
+    disabled: currentWorkflow?.TemplateLocked
+  }), /* @__PURE__ */ React.createElement("label", {
+    htmlFor: "WorkFlowStepRequiredApprovalCodeB"
+  }, "Any step item completed")), /* @__PURE__ */ React.createElement("div", {
+    className: "forms-row"
+  }, /* @__PURE__ */ React.createElement("input", {
+    type: "radio",
+    name: "WorkFlowStepRequiredApprovalCode",
+    id: "WorkFlowStepRequiredApprovalCodeC",
+    value: "C",
+    defaultChecked: currentWorkflow?.WorkFlowStepRequiredApprovalCode === "C",
+    disabled: currentWorkflow?.TemplateLocked
+  }), /* @__PURE__ */ React.createElement("label", {
+    htmlFor: "WorkFlowStepRequiredApprovalCodeC"
+  }, "All step items unless rejected")))), /* @__PURE__ */ React.createElement("div", {
+    className: "controls"
+  }, /* @__PURE__ */ React.createElement("div", {
+    className: "labels"
+  }, "Initiator Options-Start:"), /* @__PURE__ */ React.createElement("div", {
+    className: "forms",
+    onChange: changeRadioHandler
+  }, /* @__PURE__ */ React.createElement("div", {
+    className: "forms-row"
+  }, /* @__PURE__ */ React.createElement("input", {
+    type: "checkbox",
+    name: "InitiatorOptionsStart",
+    id: "InitiatorOptionsStart",
+    defaultChecked: currentWorkflow?.InitiatorOptionsStart === true,
+    disabled: currentWorkflow?.TemplateLocked
+  }), /* @__PURE__ */ React.createElement("label", {
+    htmlFor: "InitiatorOptionsStart"
+  }, "When starting a workflow: Initiator can edit step durations, roles and participants")))), /* @__PURE__ */ React.createElement("div", {
+    className: "controls"
+  }, /* @__PURE__ */ React.createElement("div", {
+    className: "labels"
+  }, "Initiator Options-During:"), /* @__PURE__ */ React.createElement("div", {
+    className: "forms",
+    onChange: changeRadioHandler
+  }, /* @__PURE__ */ React.createElement("div", {
+    className: "forms-row"
+  }, /* @__PURE__ */ React.createElement("input", {
+    type: "radio",
+    name: "WorkFlowInitiatorOptionsCode",
+    id: "WorkFlowInitiatorOptionsCodeA",
+    value: "A",
+    defaultChecked: currentWorkflow?.WorkFlowInitiatorOptionsCode === "A",
+    disabled: currentWorkflow?.TemplateLocked
+  }), /* @__PURE__ */ React.createElement("label", {
+    htmlFor: "WorkFlowInitiatorOptionsCodeA"
+  }, "While workflow in progress Initiator can edit step participants")), /* @__PURE__ */ React.createElement("div", {
+    className: "forms-row"
+  }, /* @__PURE__ */ React.createElement("input", {
+    type: "radio",
+    name: "WorkFlowInitiatorOptionsCode",
+    id: "WorkFlowInitiatorOptionsCodeB",
+    value: "B",
+    defaultChecked: currentWorkflow?.WorkFlowInitiatorOptionsCode === "B",
+    disabled: currentWorkflow?.TemplateLocked
+  }), /* @__PURE__ */ React.createElement("label", {
+    htmlFor: "WorkFlowInitiatorOptionsCodeB"
+  }, "While workflow in progress Initiator can skip steps")), /* @__PURE__ */ React.createElement("div", {
+    className: "forms-row"
+  }, /* @__PURE__ */ React.createElement("input", {
+    type: "radio",
+    name: "WorkFlowInitiatorOptionsCode",
+    id: "WorkFlowInitiatorOptionsCodeC",
+    value: "C",
+    defaultChecked: currentWorkflow?.WorkFlowInitiatorOptionsCode === "C",
+    disabled: currentWorkflow?.TemplateLocked
+  }), /* @__PURE__ */ React.createElement("label", {
+    htmlFor: "WorkFlowInitiatorOptionsCodeC"
+  }, "No Options")), /* @__PURE__ */ React.createElement("div", {
+    className: "forms-row"
+  }, /* @__PURE__ */ React.createElement("input", {
+    type: "radio",
+    name: "WorkFlowInitiatorOptionsCode",
+    id: "WorkFlowInitiatorOptionsCodeD",
+    value: "D",
+    defaultChecked: currentWorkflow?.WorkFlowInitiatorOptionsCode === "D",
+    disabled: currentWorkflow?.TemplateLocked
+  }), /* @__PURE__ */ React.createElement("label", {
+    htmlFor: "WorkFlowInitiatorOptionsCodeD"
+  }, "Initiator Can Stop Workflow")))), /* @__PURE__ */ React.createElement("div", {
+    className: "controls"
+  }, /* @__PURE__ */ React.createElement("div", {
+    className: "labels"
+  }, "On Rejection:"), /* @__PURE__ */ React.createElement("div", {
+    className: "forms",
+    onChange: changeRadioHandler
+  }, /* @__PURE__ */ React.createElement("div", {
+    className: "forms-row"
+  }, /* @__PURE__ */ React.createElement("input", {
+    type: "radio",
+    name: "WorkFlowRejectionActionCode",
+    id: "WorkFlowRejectionActionCodeA",
+    value: "A",
+    defaultChecked: currentWorkflow?.WorkFlowRejectionActionCode === "A",
+    disabled: currentWorkflow?.TemplateLocked
+  }), /* @__PURE__ */ React.createElement("label", {
+    htmlFor: "WorkFlowRejectionActionCodeA"
+  }, "Continue to next step")), /* @__PURE__ */ React.createElement("div", {
+    className: "forms-row"
+  }, /* @__PURE__ */ React.createElement("input", {
+    type: "radio",
+    name: "WorkFlowRejectionActionCode",
+    id: "WorkFlowRejectionActionCodeB",
+    value: "B",
+    defaultChecked: currentWorkflow?.WorkFlowRejectionActionCode === "B",
+    disabled: currentWorkflow?.TemplateLocked
+  }), /* @__PURE__ */ React.createElement("label", {
+    htmlFor: "WorkFlowRejectionActionCodeB"
+  }, "Back to workflow intiator")), /* @__PURE__ */ React.createElement("div", {
+    className: "forms-row"
+  }, /* @__PURE__ */ React.createElement("input", {
+    type: "radio",
+    name: "WorkFlowRejectionActionCode",
+    id: "WorkFlowRejectionActionCodeC",
+    value: "C",
+    defaultChecked: currentWorkflow?.WorkFlowRejectionActionCode === "C",
+    disabled: currentWorkflow?.TemplateLocked
+  }), /* @__PURE__ */ React.createElement("label", {
+    htmlFor: "WorkFlowRejectionActionCodeC"
+  }, "Reset and send back to previous step")))), /* @__PURE__ */ React.createElement("div", {
+    className: "controls"
+  }, /* @__PURE__ */ React.createElement("div", {
+    className: "labels"
+  }, "Is Auto Escalated:"), /* @__PURE__ */ React.createElement("div", {
+    className: "forms",
+    onChange: changeRadioHandler
+  }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("input", {
+    type: "checkbox",
+    name: "IsAutoEscalated",
+    id: "IsAutoEscalated",
+    defaultChecked: currentWorkflow?.IsAutoEscalated === true,
+    disabled: currentWorkflow?.TemplateLocked
+  })))), /* @__PURE__ */ React.createElement("div", {
+    className: "controls"
+  }, /* @__PURE__ */ React.createElement("div", {
+    className: "labels"
+  }, "Is Skip Step Allowed:"), /* @__PURE__ */ React.createElement("div", {
+    className: "forms",
+    onChange: changeRadioHandler
+  }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("input", {
+    type: "checkbox",
+    name: "IsSkipStepAllowed",
+    id: "IsSkipStepAllowed",
+    defaultChecked: currentWorkflow?.IsSkipStepAllowed === true,
+    disabled: currentWorkflow?.TemplateLocked
+  })))), /* @__PURE__ */ React.createElement("div", {
+    className: "controls"
+  }, /* @__PURE__ */ React.createElement("div", {
+    className: "labels"
+  }, "Is Delegation Allowed:"), /* @__PURE__ */ React.createElement("div", {
+    className: "forms",
+    onChange: changeRadioHandler
+  }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("input", {
+    type: "checkbox",
+    name: "IsDelegationAllowed",
+    id: "IsDelegationAllowed",
+    defaultChecked: currentWorkflow?.IsDelegationAllowed === true,
+    disabled: currentWorkflow?.TemplateLocked
+  })))));
+  return /* @__PURE__ */ React.createElement(WorkflowContext.Provider, {
+    value: {addStep, removeStep, addStepItem, removeStepItem, editStep, editStepItem, apiConfig, currentWorkflow, doa, setDoa, contacts, setContacts, currentProjectId, setCurrentProjectId, showJson, setShowJson}
+  }, /* @__PURE__ */ React.createElement("div", {
+    className: "App"
+  }, /* @__PURE__ */ React.createElement("header", {
+    className: "App-header"
+  }, /* @__PURE__ */ React.createElement(WorlkflowInterface, {
+    onChangeTemplate: changeTemplateHandler
+  })), /* @__PURE__ */ React.createElement("main", {
+    className: "App-main"
+  }, currentWorkflow !== void 0 && /* @__PURE__ */ React.createElement("p", null, /* @__PURE__ */ React.createElement("a", {
+    href: "#",
+    onClick: clickToggleShowConfig
+  }, /* @__PURE__ */ React.createElement(FontAwesomeIcon, {
+    icon: showConfig ? faAngleDown : faAngleUp,
+    className: "link-icon"
+  }), showConfig ? "hide" : "show", " config")), isLoading ? /* @__PURE__ */ React.createElement("div", {
+    className: "pageSpinners"
+  }, /* @__PURE__ */ React.createElement(SquareLoader, {
+    size: 10,
+    color: `#EEE`
+  }), /* @__PURE__ */ React.createElement(SquareLoader, {
+    size: 10,
+    color: `#EEE`
+  }), /* @__PURE__ */ React.createElement(SquareLoader, {
+    size: 10,
+    color: `#EEE`
+  })) : configForm, /* @__PURE__ */ React.createElement(WorlkflowEditor, {
+    steps: currentWorkflow
+  }), currentWorkflow !== void 0 && showJson && /* @__PURE__ */ React.createElement(ReactJson, {
+    src: currentWorkflow.WorkFlowTemplateSteps,
+    theme: "monokai",
+    displayDataTypes: false,
+    iconStyle: "square",
+    enableClipboard: false,
+    collapsed: 2
+  })), showConfirmationModal && /* @__PURE__ */ React.createElement(ConfirmationModal, {
+    resolver: confirmationResolver.current,
+    rejecter: confirmationRejecter.current
+  }), editStepModal, editStepItemModal));
+}
+export default App;

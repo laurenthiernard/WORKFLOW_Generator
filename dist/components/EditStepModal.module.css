@@ -15,6 +15,14 @@
 .EditStepModal_Content_Row {
   padding: 6px 0 0 0;
 }
+.EditStepModal_Content_Row_Inline {
+  padding: 6px 0 0 0;
+  display: flex;
+  flex-direction: row;
+}
+.EditStepModal_Content_Row_Inline div {
+  margin-right: 12px;
+}
 .EditStepModal_Footer {
   background-color: #f1f1f1;
   padding: 16px 24px 24px 24px;
@@ -43,6 +51,15 @@
 .duration {
   width: 55px;
   padding: 3px 6px;
+}
+
+.draftToggle {
+  display: flex;
+  justify-content: center;
+}
+.draftToggle_Container {
+  display: flex;
+  margin-top: auto;
 }
 
 .rules {

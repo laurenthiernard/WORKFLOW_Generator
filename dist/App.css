@@ -65,23 +65,30 @@ a:visited {
 }
 
 .App-header-content {
-  padding: 0.5rem 3rem;
+  padding: 0.5rem 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   background-color: #f0e9e9;
 }
-.App-header-content .templateSelect {
+.App-header-content .templateSelect,
+.App-header-content .projectSelect {
   display: flex;
-  padding: 0 0 0.5rem 0;
+  padding: 0;
   align-items: center;
 }
-.App-header-content .templateSelect select {
-  width: 240px;
-  margin: 4px 24px 4px 12px;
+.App-header-content .templateSelect select,
+.App-header-content .projectSelect select {
+  width: 220px;
+  margin: 4px 24px 4px 2px;
 }
-.App-header-content .templateSelect button {
+.App-header-content .templateSelect button,
+.App-header-content .projectSelect button {
   margin: 0 24px;
+}
+.App-header-content h1 {
+  width: 160px;
+  margin-right: 8px;
 }
 .App-main {
   padding: 12px;

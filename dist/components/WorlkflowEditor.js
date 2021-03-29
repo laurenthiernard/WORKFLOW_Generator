@@ -1,1 +1,70 @@
-import e from"../../web_modules/react.js";import m from"./Step.js";import c from"./InterStep.js";import s from"./WorlkflowEditor.module.css.proxy.js";import{FontAwesomeIcon as i}from"../../web_modules/@fortawesome/react-fontawesome.js";import{faGripLines as E}from"../../web_modules/@fortawesome/free-solid-svg-icons.js";export default function d(t){const{Title:f,WorkFlowTemplateSteps:n,TemplateLocked:l}=t.steps||{},a=t.steps&&Object.keys(t.steps).length>0&&t.steps.constructor===Object,_=n!==void 0?n.sort((o,r)=>o.StepNumber-r.StepNumber):[],p=a?e.createElement("div",{className:s.WorkflowContainer},e.createElement(m,{type:"start",stepJson:{StepNumber:0}}),_.map((o,r)=>e.createElement("div",{key:o.StepNumber,className:s.StepGroup},e.createElement(m,{type:"inner",stepJson:o,isLocked:l}),r<_.length-1&&e.createElement(c,{stepJson:{StepNumber:++r}}))),e.createElement(m,{type:"end",stepJson:{StepNumber:_.length}})):"";return e.createElement(e.Fragment,null,a&&e.createElement("div",{className:s.dragPanel},e.createElement("div",{className:s.newStep,id:"step",draggable:!l},e.createElement(i,{icon:E})),e.createElement("div",null,"Drag new step into template")),p)}
+import React from "../../_snowpack/pkg/react.js";
+import Step from "./Step.js";
+import InterStep from "./InterStep.js";
+import styles from "./WorlkflowEditor.module.css.proxy.js";
+import {FontAwesomeIcon} from "../../_snowpack/pkg/@fortawesome/react-fontawesome.js";
+import {faGripLines} from "../../_snowpack/pkg/@fortawesome/free-solid-svg-icons.js";
+import {useTransition, animated} from "../../_snowpack/pkg/react-spring.js";
+export default function WorlkflowEditor(props) {
+  const {Title, WorkFlowTemplateSteps, TemplateLocked} = props.steps || {};
+  const isWorkflowSelected = props.steps && Object.keys(props.steps).length > 0 && props.steps.constructor === Object;
+  const orderedSteps = WorkFlowTemplateSteps !== void 0 ? WorkFlowTemplateSteps.sort((a, b) => a.StepNumber - b.StepNumber) : [];
+  const activeOrderedSteps = orderedSteps.filter((step) => step.IsDeleted === false);
+  console.log("\u{1F680} -> WorlkflowEditor -> activeOrderedSteps", activeOrderedSteps);
+  const stepsTransition = useTransition(activeOrderedSteps, (item) => {
+    console.log("----> tansition item: ", item);
+    return item.GUID;
+  }, {
+    from: {opacity: 0},
+    enter: {opacity: 1},
+    leave: {opacity: 0},
+    unique: false
+  });
+  const steps = isWorkflowSelected ? /* @__PURE__ */ React.createElement("div", {
+    className: styles.WorkflowContainer
+  }, /* @__PURE__ */ React.createElement(Step, {
+    type: "start",
+    stepJson: {StepNumber: 0}
+  }), activeOrderedSteps.map((step, index) => !step.IsDeleted && /* @__PURE__ */ React.createElement("div", {
+    key: step.GUID,
+    className: styles.StepGroup
+  }, /* @__PURE__ */ React.createElement(Step, {
+    type: "inner",
+    stepJson: step,
+    isLocked: TemplateLocked
+  }), index < activeOrderedSteps.length - 1 && /* @__PURE__ */ React.createElement(InterStep, {
+    stepJson: {StepNumber: ++index}
+  }))), /* @__PURE__ */ React.createElement(Step, {
+    type: "end",
+    stepJson: {StepNumber: activeOrderedSteps.length}
+  })) : "";
+  return /* @__PURE__ */ React.createElement(React.Fragment, null, isWorkflowSelected && /* @__PURE__ */ React.createElement("div", {
+    className: styles.dragPanel
+  }, /* @__PURE__ */ React.createElement("div", {
+    className: styles.newStep,
+    id: "step",
+    draggable: !TemplateLocked
+  }, /* @__PURE__ */ React.createElement(FontAwesomeIcon, {
+    icon: faGripLines
+  })), /* @__PURE__ */ React.createElement("div", null, "Drag new step into template")), isWorkflowSelected ? /* @__PURE__ */ React.createElement("div", {
+    className: styles.WorkflowContainer
+  }, /* @__PURE__ */ React.createElement(Step, {
+    type: "start",
+    stepJson: {StepNumber: 0}
+  }), stepsTransition.map(({item, props: props2, key}) => {
+    return /* @__PURE__ */ React.createElement(animated.div, {
+      key: item.StepNumber,
+      style: props2,
+      className: styles.StepGroup
+    }, /* @__PURE__ */ React.createElement(Step, {
+      type: "inner",
+      stepJson: item,
+      isLocked: TemplateLocked
+    }), item.StepNumber < activeOrderedSteps.length && /* @__PURE__ */ React.createElement(InterStep, {
+      stepJson: {StepNumber: ++key}
+    }));
+  }), /* @__PURE__ */ React.createElement(Step, {
+    type: "end",
+    stepJson: {StepNumber: activeOrderedSteps.length}
+  })) : "");
+}

@@ -1,1 +1,72 @@
-import o,{useState as R,useContext as k}from"../../web_modules/react.js";import I from"./StepItem.js";import P from"../WorkflowContext.js";import t from"./Step.module.css.proxy.js";import{FontAwesomeIcon as c}from"../../web_modules/@fortawesome/react-fontawesome.js";import{faBars as H,faWindowClose as N}from"../../web_modules/@fortawesome/free-solid-svg-icons.js";export default function U(r){const{type:n}=r,{Title:l,StepDurationDays:_,WorkFlowTemplateStepItems:i,StepNumber:a}=r.stepJson||{},p=i!==void 0?i.sort((e,m)=>e.ItemOrder-m.ItemOrder):[],[f,d]=R(!1),s=k(P);function S(e){d(!0)}function u(e){d(!1)}function E(e){e.preventDefault()}function v(e){n==="inner"?s?.addStepItem(a):s?.addStep(a),d(!1)}function w(){r.isLocked||s?.removeStep(a)}function g(e){let m=e.pageX<document.body.clientWidth-310?e.pageX+20:e.pageX-315;r.isLocked||s?.editStep(a,{y:e.pageY-80,x:m})}return o.createElement("div",{className:`${t.StepContainer} ${n==="start"?t.StepStart:""} ${n==="end"?t.StepEnd:""}`},o.createElement("div",{className:t.StepHeader},n==="inner"&&o.createElement("div",{className:t.btnEditStep,onClick:g},o.createElement(c,{icon:H})),n==="start"?"Duration":n==="end"?"Total":o.createElement("div",{className:t.title},l),n==="inner"&&o.createElement("div",{className:t.duration},_," days"),n==="inner"&&o.createElement(c,{icon:N,className:t.btnRemoveStep,onClick:w})),o.createElement("div",{className:`${t.StepContent} ${f?t.hovered:""}`,onDragEnter:S,onDragLeave:u,onDragOver:E,onDrop:v},p.map(e=>o.createElement(I,{key:e.ItemOrder,stepItemJson:e,stepNumber:a,isLocked:r.isLocked}))))}
+import React, {useState, useContext} from "../../_snowpack/pkg/react.js";
+import StepItem from "./StepItem.js";
+import WorkflowContext from "../WorkflowContext.js";
+import styles from "./Step.module.css.proxy.js";
+import {FontAwesomeIcon} from "../../_snowpack/pkg/@fortawesome/react-fontawesome.js";
+import {faBars, faWindowClose} from "../../_snowpack/pkg/@fortawesome/free-solid-svg-icons.js";
+export default function Step(props) {
+  const {type} = props;
+  const {Title, StepDurationDays, WorkFlowTemplateStepItems, StepNumber, IsDraft} = props.stepJson || {};
+  const orderedStepItems = WorkFlowTemplateStepItems !== void 0 ? WorkFlowTemplateStepItems.sort((a, b) => a.ItemOrder - b.ItemOrder) : [];
+  const [isStepHovered, setIsStepHovered] = useState(false);
+  const context = useContext(WorkflowContext);
+  function dragEnterStepHandler(pEvent) {
+    setIsStepHovered(true);
+  }
+  function dragLeaveStepHandler(pEvent) {
+    setIsStepHovered(false);
+  }
+  function dragOverHandler(pEvent) {
+    pEvent.preventDefault();
+  }
+  function dropStepHandler(pEvent) {
+    type === "inner" ? context?.addStepItem(StepNumber) : context?.addStep(StepNumber);
+    setIsStepHovered(false);
+  }
+  function removeStepHandler() {
+    if (!props.isLocked)
+      context?.removeStep(StepNumber);
+  }
+  function showEditStepHandler(pEvent) {
+    let xPos = pEvent.pageX < document.body.clientWidth - 310 ? pEvent.pageX + 20 : pEvent.pageX - 315;
+    if (!props.isLocked)
+      context?.editStep(StepNumber, {y: pEvent.pageY - 80, x: xPos});
+  }
+  return /* @__PURE__ */ React.createElement("div", {
+    className: `${styles.StepContainer} ${type === "start" ? styles.StepStart : ""} ${type === "end" ? styles.StepEnd : ""}`
+  }, /* @__PURE__ */ React.createElement("div", {
+    className: styles.StepHeader
+  }, IsDraft && /* @__PURE__ */ React.createElement("div", {
+    className: styles.labelDraft
+  }, "DRAFT"), type === "inner" && /* @__PURE__ */ React.createElement("div", {
+    className: styles.btnEditStep,
+    onClick: showEditStepHandler
+  }, /* @__PURE__ */ React.createElement(FontAwesomeIcon, {
+    icon: faBars
+  })), type === "start" ? "Duration" : type === "end" ? "Total" : /* @__PURE__ */ React.createElement("div", {
+    className: styles.title
+  }, Title), type === "inner" && /* @__PURE__ */ React.createElement("div", {
+    className: styles.duration
+  }, StepDurationDays, " days"), type === "inner" && /* @__PURE__ */ React.createElement(FontAwesomeIcon, {
+    icon: faWindowClose,
+    className: styles.btnRemoveStep,
+    onClick: removeStepHandler
+  })), /* @__PURE__ */ React.createElement("div", {
+    className: `${type === "end" ? styles.StepContentEnd : styles.StepContent} ${isStepHovered ? styles.hovered : ""}`,
+    onDragEnter: dragEnterStepHandler,
+    onDragLeave: dragLeaveStepHandler,
+    onDragOver: dragOverHandler,
+    onDrop: dropStepHandler
+  }, orderedStepItems.map((stepItem, index) => /* @__PURE__ */ React.createElement("div", {
+    key: stepItem.ItemOrder,
+    className: `${styles.StepItem} ${orderedStepItems.length < 2 ? styles.sin : index === 0 ? styles.top : index === orderedStepItems.length - 1 ? styles.bot : styles.mid}`
+  }, /* @__PURE__ */ React.createElement(StepItem, {
+    stepItemJson: stepItem,
+    stepNumber: StepNumber,
+    isLocked: props.isLocked
+  }))), type === "start" && context?.currentWorkflow?.WorkFlowTemplateSteps.length > 0 && /* @__PURE__ */ React.createElement("div", {
+    className: styles.startBG
+  }), type === "end" && context?.currentWorkflow?.WorkFlowTemplateSteps.length > 0 && /* @__PURE__ */ React.createElement("div", {
+    className: styles.endBG
+  })));
+}

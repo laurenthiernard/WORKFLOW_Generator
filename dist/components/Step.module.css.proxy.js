@@ -1,75 +1,14 @@
-export let code=`._dist_components_Step_module__StepContainer {
-  display: flex;
-  flex-direction: column;
-  flex: 1 0 auto;
-  border: 1px solid #dfdfdf;
-}
-._dist_components_Step_module__StepHeader {
-  position: relative;
-  display: flex;
-  align-items: center;
-  white-space: nowrap;
-  justify-content: space-between;
-  background-color: #5e94c0;
-  color: snow;
-  padding: 2px 12px;
-  min-height: 34px;
-}
-._dist_components_Step_module__StepContent {
-  display: flex;
-  flex-direction: column;
-  flex: 1 0 auto;
-  align-items: center;
-  justify-content: center;
-  padding: 12px 6px;
-  transition: all 0.25s ease-out;
-}
-._dist_components_Step_module__StepStart {
-  flex: 0 0 120px;
-  min-height: 180px;
-}
-._dist_components_Step_module__StepEnd {
-  flex: 1 0 auto;
-  min-width: 200px;
-}
 
-._dist_components_Step_module__duration {
-  display: flex;
-  font-weight: bold;
-  color: snow;
-  padding: 4px 0;
-  margin: 0 12px;
-  align-items: center;
-}
+export let code = "._StepContainer_23pv7_1 {\n  display: flex;\n  flex-direction: column;\n  flex: 1 0 auto;\n  border: 1px solid #dfdfdf;\n}\n._StepContainer_23pv7_1 ._StepItem_23pv7_7 {\n  background: url(./connectors.png) no-repeat scroll 0 0;\n}\n._StepContainer_23pv7_1 ._StepItem_23pv7_7._top_23pv7_10 {\n  background-position: 2px -42%;\n}\n._StepContainer_23pv7_1 ._StepItem_23pv7_7._mid_23pv7_13 {\n  background-position: 2px 51%;\n}\n._StepContainer_23pv7_1 ._StepItem_23pv7_7._bot_23pv7_16 {\n  background-position: 2px 142%;\n}\n._StepContainer_23pv7_1 ._StepItem_23pv7_7._sin_23pv7_19 {\n  background: transparent url(./greypix.png) repeat-x scroll center center;\n}\n._StepHeader_23pv7_22 {\n  position: relative;\n  display: flex;\n  align-items: center;\n  white-space: nowrap;\n  justify-content: space-between;\n  background-color: #5e94c0;\n  color: snow;\n  padding: 2px 12px 2px 12px;\n  min-height: 38px;\n}\n._StepContent_23pv7_33 {\n  display: flex;\n  flex-direction: column;\n  flex: 1 0 auto;\n  align-items: center;\n  justify-content: center;\n  padding: 12px 0px;\n  transition: all 0.25s ease-out;\n}\n._StepContentEnd_23pv7_42 {\n  height: 100%;\n}\n._StepStart_23pv7_45 {\n  flex: 0 0 120px;\n  min-height: 180px;\n}\n._StepEnd_23pv7_49 {\n  flex: 1 0 auto;\n  min-width: 200px;\n}\n\n._startBG_23pv7_54 {\n  position: relative;\n  right: -45px;\n  width: 90px;\n  height: 20px;\n  background: transparent url(./markers.png) no-repeat left calc(50% - 0.5px);\n}\n\n._endBG_23pv7_62 {\n  position: relative;\n  top: calc(50% - 1px);\n  transform: translateY(-50%);\n  left: -32px;\n  width: 90px;\n  height: 32px;\n  background: transparent url(./markers.png) no-repeat right center;\n  background-attachment: scroll;\n}\n\n._duration_23pv7_73 {\n  display: flex;\n  font-weight: bold;\n  color: snow;\n  padding: 4px 0;\n  margin: 0 12px;\n  align-items: center;\n}\n\n._title_23pv7_82 {\n  min-width: 80px;\n  margin-left: 8px;\n}\n\n._hovered_23pv7_87 {\n  background-color: rgba(231, 231, 231, 0.5);\n}\n._hovered_23pv7_87 div {\n  pointer-events: none;\n}\n\n._labelDraft_23pv7_94 {\n  position: absolute;\n  top: 0;\n  left: 42px;\n  padding: 1px 6px 2px 6px;\n  background-color: #e37433;\n  color: white;\n  font-size: 7px;\n  border-radius: 0 0 3px 3px;\n  user-select: none;\n}\n\n._btnEditStep_23pv7_106 {\n  cursor: pointer;\n  font-size: 15px;\n  z-index: 5;\n  color: white;\n  margin-right: 8px;\n}\n._btnEditStep_23pv7_106:hover {\n  color: #f0e9e9;\n}\n\n._btnRemoveStep_23pv7_117 {\n  font-size: 15px;\n  color: white;\n  cursor: pointer;\n}\n._btnRemoveStep_23pv7_117:hover {\n  color: #f1f1f1;\n}";
+let json = {"StepContainer":"_StepContainer_23pv7_1","StepItem":"_StepItem_23pv7_7","top":"_top_23pv7_10","mid":"_mid_23pv7_13","bot":"_bot_23pv7_16","sin":"_sin_23pv7_19","StepHeader":"_StepHeader_23pv7_22","StepContent":"_StepContent_23pv7_33","StepContentEnd":"_StepContentEnd_23pv7_42","StepStart":"_StepStart_23pv7_45","StepEnd":"_StepEnd_23pv7_49","startBG":"_startBG_23pv7_54","endBG":"_endBG_23pv7_62","duration":"_duration_23pv7_73","title":"_title_23pv7_82","hovered":"_hovered_23pv7_87","labelDraft":"_labelDraft_23pv7_94","btnEditStep":"_btnEditStep_23pv7_106","btnRemoveStep":"_btnRemoveStep_23pv7_117"};
+export default json;
 
-._dist_components_Step_module__title {
-  min-width: 80px;
-  margin-left: 8px;
-}
+// [snowpack] add styles to the page (skip if no document exists)
+if (typeof document !== 'undefined') {
+  const styleEl = document.createElement("style");
+  const codeEl = document.createTextNode(code);
+  styleEl.type = 'text/css';
 
-._dist_components_Step_module__hovered {
-  background-color: rgba(231, 231, 231, 0.5);
+  styleEl.appendChild(codeEl);
+  document.head.appendChild(styleEl);
 }
-._dist_components_Step_module__hovered div {
-  pointer-events: none;
-}
-
-._dist_components_Step_module__btnEditStep {
-  cursor: pointer;
-  font-size: 15px;
-  z-index: 20;
-  color: white;
-  margin-right: 8px;
-}
-._dist_components_Step_module__btnEditStep:hover {
-  color: #f0e9e9;
-}
-
-._dist_components_Step_module__btnRemoveStep {
-  font-size: 15px;
-  color: white;
-  cursor: pointer;
-}
-._dist_components_Step_module__btnRemoveStep:hover {
-  color: #f1f1f1;
-}`;let n={StepContainer:"_dist_components_Step_module__StepContainer",StepHeader:"_dist_components_Step_module__StepHeader",StepContent:"_dist_components_Step_module__StepContent",StepStart:"_dist_components_Step_module__StepStart",StepEnd:"_dist_components_Step_module__StepEnd",duration:"_dist_components_Step_module__duration",title:"_dist_components_Step_module__title",hovered:"_dist_components_Step_module__hovered",btnEditStep:"_dist_components_Step_module__btnEditStep",btnRemoveStep:"_dist_components_Step_module__btnRemoveStep"};export default n;const e=document.createElement("style"),t=document.createTextNode(code);e.type="text/css",e.appendChild(t),document.head.appendChild(e);

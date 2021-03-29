@@ -1,136 +1,14 @@
-export let code=`._dist_components_SelectSearchable_module__selectItem {
-  display: block;
-  cursor: pointer;
-  padding: 4px;
-}
-._dist_components_SelectSearchable_module__selectItem:hover {
-  background-color: #5e94c0;
-}
 
-._dist_components_SelectSearchable_module__selectedItem_delete {
-  padding: 0px 4px 0px 4px;
-  background-color: #d1d1d1;
-  border-radius: 3px;
-  margin-left: 9px;
-}
-._dist_components_SelectSearchable_module__selectedItem_delete:hover {
-  background-color: #e6e6e6;
-}
-._dist_components_SelectSearchable_module__selectedItem_delete:hover svg {
-  color: #424242;
-}
-._dist_components_SelectSearchable_module__selectedItem_delete svg {
-  color: #818181;
-}
+export let code = "._selectItem_13ec3_1 {\n  display: block;\n  cursor: pointer;\n  padding: 4px;\n}\n._selectItem_13ec3_1:hover {\n  background-color: #5e94c0;\n}\n\n._selectedItem_delete_13ec3_10 {\n  padding: 0px 4px 0px 4px;\n  background-color: #d1d1d1;\n  border-radius: 3px;\n  margin-left: 9px;\n}\n._selectedItem_delete_13ec3_10:hover {\n  background-color: #e6e6e6;\n}\n._selectedItem_delete_13ec3_10:hover svg {\n  color: #424242;\n}\n._selectedItem_delete_13ec3_10 svg {\n  color: #818181;\n}\n\n._selectSearchable_13ec3_26 {\n  margin-bottom: 32px;\n}\n._selectSearchable_Container_13ec3_29 {\n  position: relative;\n  padding: 3px;\n  background-color: #ebebeb;\n  min-width: 250px;\n}\n._selectSearchable_SearchContainer_13ec3_35 {\n  position: relative;\n  width: 100%;\n  margin-bottom: 6px;\n}\n._selectSearchable_SearchContainer_13ec3_35 input[type=text] {\n  position: relative;\n  display: block;\n  background-color: white;\n  border-radius: 0;\n  box-sizing: border-box;\n  width: calc(100% - 45px);\n  border: none;\n  border-bottom: 1px solid black;\n  outline: none;\n  padding: 10px;\n}\n._selectSearchable_SearchContainer_13ec3_35 input[type=text]:focus {\n  outline: none;\n}\n._selectSearchable_SearchContainer_13ec3_35 svg {\n  position: relative;\n  float: right;\n  top: -23px;\n  left: -15px;\n  cursor: pointer;\n  color: black;\n  z-index: 20;\n}\n._selectSearchable_ItemsContainer_13ec3_64 {\n  height: 200px;\n  overflow: hidden;\n  overflow-y: scroll;\n  width: 100%;\n}\n._selectSearchable_Header_13ec3_70 {\n  position: relative;\n  display: flex;\n  justify-content: space-between;\n  min-height: 34px;\n}\n._selectSearchable_SelectedContainer_13ec3_76 {\n  width: 100%;\n  background-color: white;\n  padding: 3px;\n  cursor: pointer;\n  display: flex;\n  flex-wrap: wrap;\n}\n._selectSearchable_Trigger_13ec3_84 {\n  background-color: #5e94c0;\n  color: white;\n  width: 32px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  cursor: pointer;\n}\n._selectSearchable_SelectedItem_13ec3_93 {\n  background-color: #5e94c0;\n  color: white;\n  font-size: 0.8rem;\n  display: inline-block;\n  margin: 3px 2px 2px 0;\n  padding: 4px 8px;\n  border-radius: 3px;\n}\n._selectSearchable_SelectedItem_Selected_13ec3_102 {\n  margin: 2px 0;\n  background-color: #4981af;\n  color: white;\n}\n._selectSearchable_List_13ec3_107 {\n  position: relative;\n  display: block;\n  left: 0;\n  top: 37px;\n  font-size: 0.8rem;\n  z-index: 10;\n  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);\n  display: block;\n  padding: 10px;\n  background-color: #e6e6e6;\n  color: black;\n}\n\n._listCollapsed_13ec3_121 {\n  display: none;\n  overflow-y: auto;\n}\n\n._ListSmall_13ec3_126 {\n  width: 136px;\n}\n\n._ListMedium_13ec3_130 {\n  width: 290px;\n}\n\n._ListLarge_13ec3_134 {\n  width: 390px;\n}";
+let json = {"selectItem":"_selectItem_13ec3_1","selectedItem_delete":"_selectedItem_delete_13ec3_10","selectSearchable":"_selectSearchable_13ec3_26","selectSearchable_Container":"_selectSearchable_Container_13ec3_29","selectSearchable_SearchContainer":"_selectSearchable_SearchContainer_13ec3_35","selectSearchable_ItemsContainer":"_selectSearchable_ItemsContainer_13ec3_64","selectSearchable_Header":"_selectSearchable_Header_13ec3_70","selectSearchable_SelectedContainer":"_selectSearchable_SelectedContainer_13ec3_76","selectSearchable_Trigger":"_selectSearchable_Trigger_13ec3_84","selectSearchable_SelectedItem":"_selectSearchable_SelectedItem_13ec3_93","selectSearchable_SelectedItem_Selected":"_selectSearchable_SelectedItem_Selected_13ec3_102","selectSearchable_List":"_selectSearchable_List_13ec3_107","listCollapsed":"_listCollapsed_13ec3_121","ListSmall":"_ListSmall_13ec3_126","ListMedium":"_ListMedium_13ec3_130","ListLarge":"_ListLarge_13ec3_134"};
+export default json;
 
-._dist_components_SelectSearchable_module__selectSearchable {
-  margin-bottom: 32px;
-}
-._dist_components_SelectSearchable_module__selectSearchable_Container {
-  position: relative;
-  padding: 3px;
-  background-color: #ebebeb;
-  min-width: 150px;
-}
-._dist_components_SelectSearchable_module__selectSearchable_SearchContainer {
-  position: relative;
-  width: 100%;
-  margin-bottom: 6px;
-}
-._dist_components_SelectSearchable_module__selectSearchable_SearchContainer input[type=text] {
-  position: relative;
-  display: block;
-  background-color: white;
-  border-radius: 0;
-  box-sizing: border-box;
-  width: calc(100% - 45px);
-  border: none;
-  border-bottom: 1px solid black;
-  outline: none;
-  padding: 10px;
-}
-._dist_components_SelectSearchable_module__selectSearchable_SearchContainer input[type=text]:focus {
-  outline: none;
-}
-._dist_components_SelectSearchable_module__selectSearchable_SearchContainer svg {
-  position: relative;
-  float: right;
-  top: -23px;
-  left: -15px;
-  cursor: pointer;
-  color: black;
-  z-index: 20;
-}
-._dist_components_SelectSearchable_module__selectSearchable_ItemsContainer {
-  height: 200px;
-  overflow: hidden;
-  overflow-y: scroll;
-  width: 100%;
-}
-._dist_components_SelectSearchable_module__selectSearchable_Header {
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  min-height: 34px;
-}
-._dist_components_SelectSearchable_module__selectSearchable_SelectedContainer {
-  width: 100%;
-  background-color: white;
-  padding: 3px;
-  cursor: pointer;
-  display: flex;
-  flex-wrap: wrap;
-}
-._dist_components_SelectSearchable_module__selectSearchable_Trigger {
-  background-color: #5e94c0;
-  color: white;
-  width: 32px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-}
-._dist_components_SelectSearchable_module__selectSearchable_SelectedItem {
-  background-color: #5e94c0;
-  color: white;
-  font-size: 0.8rem;
-  display: inline-block;
-  margin: 3px 2px 2px 0;
-  padding: 4px 8px;
-  border-radius: 3px;
-}
-._dist_components_SelectSearchable_module__selectSearchable_SelectedItem_Selected {
-  margin: 2px 0;
-  background-color: #4981af;
-  color: white;
-}
-._dist_components_SelectSearchable_module__selectSearchable_List {
-  position: relative;
-  display: block;
-  left: 0;
-  top: 37px;
-  font-size: 0.8rem;
-  z-index: 10;
-  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
-  display: block;
-  padding: 10px;
-  background-color: #e6e6e6;
-  color: black;
-}
+// [snowpack] add styles to the page (skip if no document exists)
+if (typeof document !== 'undefined') {
+  const styleEl = document.createElement("style");
+  const codeEl = document.createTextNode(code);
+  styleEl.type = 'text/css';
 
-._dist_components_SelectSearchable_module__listCollapsed {
-  display: none;
-  overflow-y: auto;
+  styleEl.appendChild(codeEl);
+  document.head.appendChild(styleEl);
 }
-
-._dist_components_SelectSearchable_module__ListSmall {
-  width: 136px;
-}
-
-._dist_components_SelectSearchable_module__ListMedium {
-  width: 290px;
-}
-
-._dist_components_SelectSearchable_module__ListLarge {
-  width: 390px;
-}`;let n={selectItem:"_dist_components_SelectSearchable_module__selectItem",selectedItem_delete:"_dist_components_SelectSearchable_module__selectedItem_delete",selectSearchable:"_dist_components_SelectSearchable_module__selectSearchable",selectSearchable_Container:"_dist_components_SelectSearchable_module__selectSearchable_Container",selectSearchable_SearchContainer:"_dist_components_SelectSearchable_module__selectSearchable_SearchContainer",selectSearchable_ItemsContainer:"_dist_components_SelectSearchable_module__selectSearchable_ItemsContainer",selectSearchable_Header:"_dist_components_SelectSearchable_module__selectSearchable_Header",selectSearchable_SelectedContainer:"_dist_components_SelectSearchable_module__selectSearchable_SelectedContainer",selectSearchable_Trigger:"_dist_components_SelectSearchable_module__selectSearchable_Trigger",selectSearchable_SelectedItem:"_dist_components_SelectSearchable_module__selectSearchable_SelectedItem",selectSearchable_SelectedItem_Selected:"_dist_components_SelectSearchable_module__selectSearchable_SelectedItem_Selected",selectSearchable_List:"_dist_components_SelectSearchable_module__selectSearchable_List",listCollapsed:"_dist_components_SelectSearchable_module__listCollapsed",ListSmall:"_dist_components_SelectSearchable_module__ListSmall",ListMedium:"_dist_components_SelectSearchable_module__ListMedium",ListLarge:"_dist_components_SelectSearchable_module__ListLarge"};export default n;const e=document.createElement("style"),t=document.createTextNode(code);e.type="text/css",e.appendChild(t),document.head.appendChild(e);

@@ -1,1 +1,101 @@
-import l,{useState as S,useEffect as I,useRef as h}from"../../web_modules/react.js";import c from"./SelectSearchable.module.css.proxy.js";import{FontAwesomeIcon as u}from"../../web_modules/@fortawesome/react-fontawesome.js";import{faAngleUp as g,faAngleDown as k,faTimes as w}from"../../web_modules/@fortawesome/free-solid-svg-icons.js";function C(t){const[r,i]=S(t),n=h(null),_=m=>{n.current&&!n.current.contains(m.target)&&i(!1)};return I(()=>(document.addEventListener("click",_,!0),()=>{document.removeEventListener("click",_,!0)}),[]),{ref:n,isVisible:r,setIsVisible:i}}export default function N(t){const[r,i]=S(""),n=h(null),_=t.items,m=t.allowMultiple,f=t.width,R=r.split(" ").filter(e=>e.length>0),P=()=>_.filter(e=>R.every(s=>String(e.label).toLowerCase().includes(s.toLowerCase()))),{ref:U,isVisible:o,setIsVisible:E}=C(!1,n);function b(e,s){if(e.stopPropagation(),e.currentTarget.className.includes("delete")){t.onSelectItem(t.selectedItems.filter(a=>a.label!==s.label));return}if(m){const a=t.selectedItems.findIndex(d=>d.label===s.label);a>-1?t.onSelectItem(t.selectedItems.filter(d=>d!==s)):t.onSelectItem([...t.selectedItems,s])}else t.onSelectItem([s]),E(!1)}I(()=>{n.current&&n.current.focus()},[o]);const v=f==="s"?c.ListSmall:f==="m"?c.ListMedium:c.ListLarge;return l.createElement("div",{className:c.selectSearchable_Container},l.createElement("div",{className:c.selectSearchable_Header,onClick:e=>E(!o)},l.createElement("div",{className:c.selectSearchable_SelectedContainer},t.selectedItems.map((e,s)=>l.createElement("div",{key:s,className:c.selectSearchable_SelectedItem},e.label,l.createElement("span",{className:c.selectedItem_delete,onClick:a=>b(a,e)},l.createElement(u,{icon:w}))))),l.createElement("div",{className:c.selectSearchable_Trigger},l.createElement(u,{icon:o?k:g}))),o&&l.createElement("div",{style:{position:"absolute"},className:`${c.selectSearchable_List} ${v}`,ref:U},l.createElement("div",{className:c.selectSearchable_SearchContainer},l.createElement("input",{type:"text",value:r,onChange:e=>i(e.target.value),ref:n}),l.createElement(u,{icon:w,onClick:e=>i("")})),l.createElement("div",{className:c.selectSearchable_ItemsContainer},P().map((e,s)=>l.createElement("span",{key:s,className:`${c.selectItem} ${t.selectedItems.findIndex(a=>e.label===a.label)>-1?c.selectSearchable_SelectedItem_Selected:""}`,onClick:a=>b(a,e)},e.label)))))}
+import React, {useState, useEffect, useRef} from "../../_snowpack/pkg/react.js";
+import styles from "./SelectSearchable.module.css.proxy.js";
+import {FontAwesomeIcon} from "../../_snowpack/pkg/@fortawesome/react-fontawesome.js";
+import {faAngleUp, faAngleDown, faTimes} from "../../_snowpack/pkg/@fortawesome/free-solid-svg-icons.js";
+function useVisible(initialIsVisible) {
+  const [isVisible, setIsVisible] = useState(initialIsVisible);
+  const ref = useRef(null);
+  const handleClickOutside = (event) => {
+    if (ref.current && !ref.current.contains(event.target)) {
+      setIsVisible(false);
+    }
+  };
+  useEffect(() => {
+    document.addEventListener("click", handleClickOutside, true);
+    return () => {
+      document.removeEventListener("click", handleClickOutside, true);
+    };
+  }, []);
+  return {ref, isVisible, setIsVisible};
+}
+export default function SelectSearchable(props) {
+  const [keyword, setKeyword] = useState("");
+  const input = useRef(null);
+  const items = props.items;
+  const allowMultiple = props.allowMultiple;
+  const width = props.width;
+  const keywords = keyword.split(" ").filter((word) => word.length > 0);
+  const multiFiltered = () => {
+    return items.filter((item) => keywords.every((keyword2) => String(item.label).toLowerCase().includes(keyword2.toLowerCase())));
+  };
+  const {ref, isVisible, setIsVisible} = useVisible(false, input);
+  function onClickItemHandler(pEvent, pItem) {
+    console.log("\u{1F680} -> onClickItemHandler -> pItem", pItem);
+    pEvent.stopPropagation();
+    if (pEvent.currentTarget.className.includes("delete")) {
+      if (props.deleteMode === "keep") {
+        const itemToUpdateIndex = props.selectedItems.findIndex((item) => item.UserGUID === pItem.UserGUID);
+        const itemsToUpdate = [...props.selectedItems];
+        itemsToUpdate[itemToUpdateIndex].IsDeleted = true;
+        props.onSelectItem([...itemsToUpdate]);
+      } else
+        props.onSelectItem(props.selectedItems.filter((item) => item.GUID !== pItem.GUID));
+      return;
+    }
+    if (allowMultiple) {
+      const clickedItemIndex = props.selectedItems.findIndex((item) => item.label === pItem.label);
+      if (clickedItemIndex > -1) {
+        props.onSelectItem(props.selectedItems.filter((item) => item !== pItem));
+      } else
+        props.onSelectItem([...props.selectedItems, pItem]);
+    } else {
+      props.onSelectItem([pItem]);
+      setIsVisible(false);
+    }
+  }
+  useEffect(() => {
+    if (input.current)
+      input.current.focus();
+  }, [isVisible]);
+  const cssWidth = width === "s" ? styles.ListSmall : width === "m" ? styles.ListMedium : styles.ListLarge;
+  return /* @__PURE__ */ React.createElement("div", {
+    className: styles.selectSearchable_Container
+  }, /* @__PURE__ */ React.createElement("div", {
+    className: styles.selectSearchable_Header,
+    onClick: (e) => setIsVisible(!isVisible)
+  }, /* @__PURE__ */ React.createElement("div", {
+    className: styles.selectSearchable_SelectedContainer
+  }, props.selectedItems.map((item, index) => /* @__PURE__ */ React.createElement("div", {
+    key: index,
+    className: styles.selectSearchable_SelectedItem
+  }, item.label, /* @__PURE__ */ React.createElement("span", {
+    className: styles.selectedItem_delete,
+    onClick: (e) => onClickItemHandler(e, item)
+  }, /* @__PURE__ */ React.createElement(FontAwesomeIcon, {
+    icon: faTimes
+  })))).filter((item) => !item.Isdeleted)), /* @__PURE__ */ React.createElement("div", {
+    className: styles.selectSearchable_Trigger
+  }, /* @__PURE__ */ React.createElement(FontAwesomeIcon, {
+    icon: isVisible ? faAngleDown : faAngleUp
+  }))), isVisible && /* @__PURE__ */ React.createElement("div", {
+    style: {position: "absolute"},
+    className: `${styles.selectSearchable_List} ${cssWidth}`,
+    ref
+  }, /* @__PURE__ */ React.createElement("div", {
+    className: styles.selectSearchable_SearchContainer
+  }, /* @__PURE__ */ React.createElement("input", {
+    type: "text",
+    value: keyword,
+    onChange: (e) => setKeyword(e.target.value),
+    ref: input
+  }), /* @__PURE__ */ React.createElement(FontAwesomeIcon, {
+    icon: faTimes,
+    onClick: (e) => setKeyword("")
+  })), /* @__PURE__ */ React.createElement("div", {
+    className: styles.selectSearchable_ItemsContainer
+  }, multiFiltered().map((item, index) => /* @__PURE__ */ React.createElement("span", {
+    key: index,
+    className: `${styles.selectItem} ${props.selectedItems.findIndex((selectedItem) => item.label === selectedItem.label) > -1 ? styles.selectSearchable_SelectedItem_Selected : ""}`,
+    onClick: (e) => onClickItemHandler(e, item)
+  }, item.label)))));
+}

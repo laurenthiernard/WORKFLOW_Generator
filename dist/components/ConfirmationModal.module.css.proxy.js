@@ -1,45 +1,14 @@
-export let code=`._dist_components_ConfirmationModal_module__ConfirmationModal_Container {
-  position: absolute;
-  min-width: 300px;
-  z-index: 30;
-  left: calc(50vw - 150px);
-  top: calc(70vh - 120px);
-}
-._dist_components_ConfirmationModal_module__ConfirmationModal_Header {
-  background-color: #f1f1f1;
-  padding: 16px 24px 6px 24px;
-  border-radius: 4px 4px 0 0;
-}
-._dist_components_ConfirmationModal_module__ConfirmationModal_Content {
-  background-color: #f1f1f1;
-  padding: 0 24px 24px 24px;
-}
-._dist_components_ConfirmationModal_module__ConfirmationModal_Content_Row {
-  padding: 6px 0 0 0;
-}
-._dist_components_ConfirmationModal_module__ConfirmationModal_Footer {
-  background-color: #f1f1f1;
-  padding: 16px 24px 24px 24px;
-  border-radius: 0 0 4px 4px;
-  display: flex;
-}
-._dist_components_ConfirmationModal_module__ConfirmationModal_btnOK {
-  margin-left: auto;
-  background-color: #4981af;
-}
-._dist_components_ConfirmationModal_module__ConfirmationModal_btnOK:hover {
-  background-color: #5e94c0;
-}
-._dist_components_ConfirmationModal_module__ConfirmationModal_btnCancel {
-  background-color: gray;
-}
 
-._dist_components_ConfirmationModal_module__backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.35);
-  z-index: 25;
-}`;let n={ConfirmationModal_Container:"_dist_components_ConfirmationModal_module__ConfirmationModal_Container",ConfirmationModal_Header:"_dist_components_ConfirmationModal_module__ConfirmationModal_Header",ConfirmationModal_Content:"_dist_components_ConfirmationModal_module__ConfirmationModal_Content",ConfirmationModal_Content_Row:"_dist_components_ConfirmationModal_module__ConfirmationModal_Content_Row",ConfirmationModal_Footer:"_dist_components_ConfirmationModal_module__ConfirmationModal_Footer",ConfirmationModal_btnOK:"_dist_components_ConfirmationModal_module__ConfirmationModal_btnOK",ConfirmationModal_btnCancel:"_dist_components_ConfirmationModal_module__ConfirmationModal_btnCancel",backdrop:"_dist_components_ConfirmationModal_module__backdrop"};export default n;const o=document.createElement("style"),t=document.createTextNode(code);o.type="text/css",o.appendChild(t),document.head.appendChild(o);
+export let code = "._ConfirmationModal_Container_1vf91_1 {\n  position: absolute;\n  min-width: 300px;\n  z-index: 30;\n  left: calc(50vw - 150px);\n  top: calc(70vh - 120px);\n}\n._ConfirmationModal_Header_1vf91_8 {\n  background-color: #f1f1f1;\n  padding: 16px 24px 6px 24px;\n  border-radius: 4px 4px 0 0;\n}\n._ConfirmationModal_Content_1vf91_13 {\n  background-color: #f1f1f1;\n  padding: 0 24px 24px 24px;\n}\n._ConfirmationModal_Content_Row_1vf91_17 {\n  padding: 6px 0 0 0;\n}\n._ConfirmationModal_Footer_1vf91_20 {\n  background-color: #f1f1f1;\n  padding: 16px 24px 24px 24px;\n  border-radius: 0 0 4px 4px;\n  display: flex;\n}\n._ConfirmationModal_btnOK_1vf91_26 {\n  margin-left: auto;\n  background-color: #4981af;\n}\n._ConfirmationModal_btnOK_1vf91_26:hover {\n  background-color: #5e94c0;\n}\n._ConfirmationModal_btnCancel_1vf91_33 {\n  background-color: gray;\n}\n\n._backdrop_1vf91_37 {\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100vw;\n  height: 100vh;\n  background-color: rgba(0, 0, 0, 0.35);\n  z-index: 25;\n}";
+let json = {"ConfirmationModal_Container":"_ConfirmationModal_Container_1vf91_1","ConfirmationModal_Header":"_ConfirmationModal_Header_1vf91_8","ConfirmationModal_Content":"_ConfirmationModal_Content_1vf91_13","ConfirmationModal_Content_Row":"_ConfirmationModal_Content_Row_1vf91_17","ConfirmationModal_Footer":"_ConfirmationModal_Footer_1vf91_20","ConfirmationModal_btnOK":"_ConfirmationModal_btnOK_1vf91_26","ConfirmationModal_btnCancel":"_ConfirmationModal_btnCancel_1vf91_33","backdrop":"_backdrop_1vf91_37"};
+export default json;
+
+// [snowpack] add styles to the page (skip if no document exists)
+if (typeof document !== 'undefined') {
+  const styleEl = document.createElement("style");
+  const codeEl = document.createTextNode(code);
+  styleEl.type = 'text/css';
+
+  styleEl.appendChild(codeEl);
+  document.head.appendChild(styleEl);
+}

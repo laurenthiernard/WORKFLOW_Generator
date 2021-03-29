@@ -1,1 +1,215 @@
-import n,{useState as p,useEffect as _,useContext as F}from"../../web_modules/react.js";import H from"../WorkflowContext.js";import L from"./ConfigModal.js";export default function x(s){const[w,E]=p([]),[g,C]=p([]),a=F(H),[I,P]=p(!1),[v,k]=p(null),[D,h]=p("Save"),l=a?.currentWorkflow;_(()=>{h("Save")},[l]);const i=a?.apiConfig.url,U=a?.apiConfig.token,u=new Headers;u.append("Authorization",`Bearer ${U}`),u.append("Content-Type","application/x-www-form-urlencoded");const f={method:"GET",headers:u,redirect:"follow"};_(()=>{T()},[]);function T(){fetch(`${i}V1.0/WorkFlow/Templates`,f).then(e=>e.json()).then(e=>{if(l!==void 0){const t=e.filter(o=>o.GUID===l.GUID)[0];console.log("🚀 -> fetchTemplates -> selectedTemplate",t),s.onChangeTemplate(t)}E(e)}).catch(e=>console.log("error",e))}_(()=>{fetch(`${i}V1.0/Project`,f).then(e=>e.json()).then(e=>{if(C(e),l?.ProjectGUID!==void 0){const t=e.filter(o=>o.GUID==l?.ProjectGUID)[0];a?.setCurrentProjectId(t.Id),fetch(`${i}V1.0/Project/${t.Id}/Directory/Contacts`,f).then(o=>o.json()).then(o=>{const c=o.filter(m=>m.User),d=c.map(m=>m.User.GUID),r=c.filter((m,N)=>!d.includes(m.User.GUID,N+1));a?.setContacts(r)}).catch(o=>console.log("error",o))}}).catch(e=>console.log("error",e)),fetch(`${i}V1.0/WorkFlow/DelegationOfAuthority`,f).then(e=>e.json()).then(e=>{console.log("%c Fetching DOA ","background:navy;color:white;"),console.log("----> DOA response: ",e),a?.setDoa(e)}).catch(e=>console.log("error",e))},[l]);function b(e){const t=w.filter(o=>o.GUID===e.target.value)[0];e.target.value!=="none"?s.onChangeTemplate(t):s.onChangeTemplate(void 0)}function j(e){let t=e.pageX<document.body.clientWidth-310?e.pageX+20:e.pageX-315;P(!0),k(n.createElement(L,{projectList:g,viewportPosition:{y:e.pageY+35,x:t-150},onClose:R,onSubmit:S}))}function R(e){k(null)}function S({projectShortName:e,title:t,isDOADependant:o}){console.log("----> pParams: ",e,t,o),s.onChangeTemplate(A(e,t,o))}function W(e){const t={...l,TemplateLocked:!0};s.onChangeTemplate(t)}function y(e){console.log("currentWorkflow to save:",l),h("Saving...");const t=new Headers;t.append("Authorization",`Bearer ${U}`),t.append("Content-Type","application/json");const o=JSON.stringify(l),c={method:"PUT",headers:t,body:o},d={method:"POST",headers:t,body:o};fetch(`${i}V1.0/WorkFlow/Template`,I?d:c).then(r=>r.json()).then(r=>{console.log("%c Fetching Workflow ","background:red;color:white;"),console.log("----> Workflow response: ",r),h("Saved"),T()}).catch(r=>console.log("error",r))}const A=(e,t,o)=>{const c=g.filter(d=>d.ShortName===e)[0].GUID;return console.log("🚀 -> getNewTemplate -> projectGUID",c),{ProjectGUID:c,ExTrackModuleId:15,ModuleName:"Timesheets",TemplateLocked:!1,Title:t,Message:"",WorkFlowOutcomeDecidedByCode:"A",WorkFlowStepRequiredApprovalCode:"A",InitiatorOptionsStart:!1,WorkFlowInitiatorOptionsCode:"A",WorkFlowRejectionActionCode:"A",IsAutoEscalated:!1,IsSkipStepAllowed:!1,IsDelegationAllowed:!1,StepsDelegationOfAuthorityDependant:o,IsInactive:!1,IsDeleted:!1,WorkFlowTemplateSteps:[]}};function G(e){a?.setShowJson(!a?.showJson)}return n.createElement("div",{className:"App-header-content"},n.createElement("div",{className:"templateSelect"},n.createElement("h1",null,"Select a template:"),n.createElement("select",{name:"templateDropdown",id:"templateDropdown",onChange:b},n.createElement("option",{value:"none"},"-------------------"),w.map((e,t)=>n.createElement("option",{key:t,value:e.GUID},e.Title))),n.createElement("div",null,"or ",n.createElement("button",{className:"btn",onClick:j},"Create a new template"))),l!==void 0&&n.createElement("div",{className:"actionBtns"},n.createElement("button",{className:"btn",onClick:W,disabled:l.TemplateLocked},"Lock template"),n.createElement("button",{className:"btn",onClick:y,disabled:!1},D),n.createElement("input",{type:"checkbox",name:"showJson",id:"showJson",onChange:G,checked:a?.showJson}),n.createElement("label",{htmlFor:"showJson"},"Json")),v)}
+import React, {useState, useEffect, useContext} from "../../_snowpack/pkg/react.js";
+import WorkflowContext from "../WorkflowContext.js";
+import SelectSearchable from "./SelectSearchable.js";
+import ConfigModal from "./ConfigModal.js";
+export default function WorlkflowInterface(props) {
+  const [workflows, setWorkflows] = useState([]);
+  const [projects, setProjects] = useState([]);
+  const context = useContext(WorkflowContext);
+  const [isNewTemplate, setIsNewTemplate] = useState(false);
+  const [configModal, setConfigModal] = useState(null);
+  const [saveBtnLabel, setSaveBtnLabel] = useState("Save");
+  const currentWorkflow = context?.currentWorkflow;
+  const apiURL = context?.apiConfig.url;
+  const currentToken = context?.apiConfig.token;
+  const [selectedProject, setSelectedProject] = useState([]);
+  const [selectedTemplate, setSelectedTemplate] = useState([]);
+  const [selectedProjectGUID, setSelectedProjectGUID] = useState(window["SelectedProjectGUID"]);
+  const [selectedTemplateGUID, setSelectedTemplateGUID] = useState(window["SelectedTemplateGUID"]);
+  useEffect(() => {
+    const htmlVars = {selectedProjectID: context?.currentProjectId, selectedProjectGUID, selectedTemplateGUID};
+    for (let key in htmlVars)
+      if (htmlVars[key] === void 0)
+        delete htmlVars[key];
+    console.log("%c     HTML vars     ", "background-color:red;color:white;", Object.keys(htmlVars).length > 0 ? htmlVars : "No values set");
+    fetchProjects();
+    fetchDOAs();
+    if (context?.currentProjectId !== void 0)
+      fetchContacts(context?.currentProjectId);
+  }, []);
+  useEffect(() => {
+    if (selectedProjectGUID !== void 0) {
+      fetchTemplates();
+      fetchContacts();
+    }
+  }, [selectedProjectGUID]);
+  useEffect(() => {
+    setSaveBtnLabel("Save");
+  }, [currentWorkflow]);
+  const fetchWorkflowHeaders = new Headers();
+  fetchWorkflowHeaders.append("Authorization", `Bearer ${currentToken}`);
+  fetchWorkflowHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+  const getRequest = {
+    method: "GET",
+    headers: fetchWorkflowHeaders,
+    redirect: "follow"
+  };
+  function fetchTemplates() {
+    fetch(`${apiURL}${context?.apiConfig.templatesStem}?RootProjectGuid=${selectedProjectGUID}`, getRequest).then((data) => data.json()).then((response) => {
+      console.log("%c Fetching Templates ", "background:purple;color:white;", response);
+      if (selectedTemplateGUID !== void 0) {
+        const selectedTemplate2 = response.filter((workflow) => workflow.GUID === selectedTemplateGUID)[0];
+        console.log("%c Set current Template ", "background:green;color:white;", selectedTemplate2);
+        props.onChangeTemplate(selectedTemplate2);
+      }
+      setWorkflows(response);
+    }).catch((error) => console.log("error", error));
+  }
+  function fetchProjects() {
+    fetch(`${apiURL}${context?.apiConfig.projectsStem}`, getRequest).then((data) => data.json()).then((projectsResponse) => {
+      setProjects(projectsResponse);
+    }).catch((error) => console.log("error", error));
+  }
+  function fetchDOAs() {
+    fetch(`${apiURL}${context?.apiConfig.doaStem}`, getRequest).then((data) => data.json()).then((response) => {
+      const doaFormatted = context?.apiConfig.env == "prod" ? response.data : response;
+      context?.setDoa(doaFormatted);
+    }).catch((error) => console.log("error", error));
+  }
+  function fetchContacts() {
+    fetch(`${apiURL}${context?.apiConfig.contactStem}`, getRequest).then((data) => data.json()).then((contactsResponse) => {
+      console.log("%c Fetching contacts ", "background:gold;color:white;", contactsResponse);
+      const contactList = contactsResponse.filter((contact) => contact.User);
+      const userGUIDs = contactList.map((contact) => contact.User.GUID);
+      const filteredList = contactList.filter((item, index) => !userGUIDs.includes(item.User.GUID, index + 1));
+      console.log(" ----> %c Filtered: ", "background:gold;color:white;", filteredList);
+      context?.setContacts(filteredList);
+    }).catch((error) => console.log("error", error));
+  }
+  function changeTemplateHandler(pTemplateGUID) {
+    console.log("----> changeTemplateHandler: ", pTemplateGUID);
+    setSelectedTemplateGUID(pTemplateGUID);
+    const selectedTemplate2 = workflows.filter((workflow) => workflow.GUID === pTemplateGUID);
+    props.onChangeTemplate(selectedTemplate2[0]);
+  }
+  function clickNewTemplateHandler(pEvent) {
+    let xPos = pEvent.pageX < document.body.clientWidth - 310 ? pEvent.pageX + 20 : pEvent.pageX - 315;
+    setIsNewTemplate(true);
+    setConfigModal(/* @__PURE__ */ React.createElement(ConfigModal, {
+      projectList: projects,
+      viewportPosition: {y: pEvent.pageY + 35, x: xPos - 150},
+      onClose: closeConfigModalHandler,
+      onSubmit: submitConfigModalHandler
+    }));
+  }
+  function closeConfigModalHandler(pEvent) {
+    setConfigModal(null);
+  }
+  function submitConfigModalHandler({title, isDOADependant}) {
+    console.log("Create New Template config: ", {title, isDOADependant});
+    props.onChangeTemplate(getNewTemplate(title, isDOADependant));
+  }
+  function clickLockHandler(pEvent) {
+    const worflowToUpdate = {...currentWorkflow, TemplateLocked: true};
+    props.onChangeTemplate(worflowToUpdate);
+  }
+  function clickSaveHandler(pEvent) {
+    console.log("Workflow to save:", currentWorkflow);
+    setSaveBtnLabel("Saving...");
+    const updateWorkflowHeaders = new Headers();
+    updateWorkflowHeaders.append("Authorization", `Bearer ${currentToken}`);
+    updateWorkflowHeaders.append("Content-Type", "application/json");
+    const workflowBody = JSON.stringify(currentWorkflow);
+    const putRequest = {
+      method: "PUT",
+      headers: updateWorkflowHeaders,
+      body: workflowBody
+    };
+    const postRequest = {
+      method: "POST",
+      headers: updateWorkflowHeaders,
+      body: workflowBody
+    };
+    fetch(`${apiURL}${context?.apiConfig.templateSaveStem}?RootProjectGuid=${selectedProjectGUID}`, isNewTemplate ? postRequest : putRequest).then((data) => data.json()).then((response) => {
+      console.log("%c Fetching Workflow ", "background:red;color:white;");
+      console.log("----> Workflow response: ", response);
+      setSaveBtnLabel("Saved");
+      fetchTemplates();
+      setSelectedTemplate([response]);
+    }).catch((error) => console.log("error", error));
+  }
+  const getNewTemplate = (pTitle, pDoa) => {
+    return {
+      ProjectGUID: selectedProjectGUID,
+      ExTrackModuleId: 15,
+      ModuleName: "Timesheets",
+      TemplateLocked: false,
+      Title: pTitle,
+      Message: "",
+      WorkFlowOutcomeDecidedByCode: "A",
+      WorkFlowStepRequiredApprovalCode: "A",
+      InitiatorOptionsStart: false,
+      WorkFlowInitiatorOptionsCode: "A",
+      WorkFlowRejectionActionCode: "A",
+      IsAutoEscalated: false,
+      IsSkipStepAllowed: false,
+      IsDelegationAllowed: false,
+      StepsDelegationOfAuthorityDependant: pDoa,
+      IsInactive: false,
+      IsDeleted: false,
+      WorkFlowTemplateSteps: []
+    };
+  };
+  function toggleShowJsonHandler(pEvent) {
+    context?.setShowJson(!context?.showJson);
+  }
+  return /* @__PURE__ */ React.createElement("div", {
+    className: "App-header-content"
+  }, /* @__PURE__ */ React.createElement("div", null, window.SelectedProjectGUID === void 0 && /* @__PURE__ */ React.createElement("div", {
+    className: "projectSelect"
+  }, /* @__PURE__ */ React.createElement("h1", null, "Select a project:"), /* @__PURE__ */ React.createElement(SelectSearchable, {
+    items: projects.map((value) => ({label: value.ShortName, GUID: value.GUID, ProjectId: value.Id})),
+    selectedItems: selectedProject.map((project) => {
+      return {label: project.label, GUID: project.GUID, ProjectId: project.ProjectId};
+    }),
+    allowMultiple: false,
+    width: "m",
+    onSelectItem: (item) => {
+      if (item.length > 0) {
+        console.log("Project selected: ", item[0]);
+        context?.setCurrentProjectId(item[0].ProjectId);
+        setSelectedProjectGUID(item[0].GUID);
+      } else
+        setSelectedProjectGUID(void 0);
+      setSelectedProject(item);
+    }
+  })), selectedProjectGUID !== void 0 && /* @__PURE__ */ React.createElement("div", {
+    className: "templateSelect"
+  }, /* @__PURE__ */ React.createElement("h1", null, "Select a template:"), /* @__PURE__ */ React.createElement(SelectSearchable, {
+    items: workflows.map((value) => ({label: value.Title, GUID: value.GUID})),
+    selectedItems: selectedTemplate.map((project) => {
+      return {label: project.label || project.Title, GUID: project.GUID};
+    }),
+    allowMultiple: false,
+    width: "m",
+    onSelectItem: (item) => {
+      console.log("----> item: ", item);
+      if (item.length > 0)
+        changeTemplateHandler(item[0].GUID);
+      else
+        props.onChangeTemplate(void 0);
+      setSelectedTemplate(item);
+    }
+  }))), selectedProjectGUID !== void 0 && /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("button", {
+    className: "btn",
+    onClick: clickNewTemplateHandler
+  }, "Create a new template")), currentWorkflow !== void 0 && /* @__PURE__ */ React.createElement("div", {
+    className: "actionBtns"
+  }, /* @__PURE__ */ React.createElement("button", {
+    className: "btn",
+    onClick: clickLockHandler,
+    disabled: currentWorkflow.TemplateLocked
+  }, "Lock template"), /* @__PURE__ */ React.createElement("button", {
+    className: "btn",
+    onClick: clickSaveHandler,
+    disabled: false
+  }, saveBtnLabel), /* @__PURE__ */ React.createElement("input", {
+    type: "checkbox",
+    name: "showJson",
+    id: "showJson",
+    onChange: toggleShowJsonHandler,
+    checked: context?.showJson
+  }), /* @__PURE__ */ React.createElement("label", {
+    htmlFor: "showJson"
+  }, "Json")), configModal);
+}

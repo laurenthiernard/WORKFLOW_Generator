@@ -4,6 +4,21 @@
   flex: 1 0 auto;
   border: 1px solid #dfdfdf;
 }
+.StepContainer .StepItem {
+  background: url(./connectors.png) no-repeat scroll 0 0;
+}
+.StepContainer .StepItem.top {
+  background-position: 2px -42%;
+}
+.StepContainer .StepItem.mid {
+  background-position: 2px 51%;
+}
+.StepContainer .StepItem.bot {
+  background-position: 2px 142%;
+}
+.StepContainer .StepItem.sin {
+  background: transparent url(./greypix.png) repeat-x scroll center center;
+}
 .StepHeader {
   position: relative;
   display: flex;
@@ -12,8 +27,8 @@
   justify-content: space-between;
   background-color: #5e94c0;
   color: snow;
-  padding: 2px 12px;
-  min-height: 34px;
+  padding: 2px 12px 2px 12px;
+  min-height: 38px;
 }
 .StepContent {
   display: flex;
@@ -21,8 +36,11 @@
   flex: 1 0 auto;
   align-items: center;
   justify-content: center;
-  padding: 12px 6px;
+  padding: 12px 0px;
   transition: all 0.25s ease-out;
+}
+.StepContentEnd {
+  height: 100%;
 }
 .StepStart {
   flex: 0 0 120px;
@@ -31,6 +49,25 @@
 .StepEnd {
   flex: 1 0 auto;
   min-width: 200px;
+}
+
+.startBG {
+  position: relative;
+  right: -45px;
+  width: 90px;
+  height: 20px;
+  background: transparent url(./markers.png) no-repeat left calc(50% - 0.5px);
+}
+
+.endBG {
+  position: relative;
+  top: calc(50% - 1px);
+  transform: translateY(-50%);
+  left: -32px;
+  width: 90px;
+  height: 32px;
+  background: transparent url(./markers.png) no-repeat right center;
+  background-attachment: scroll;
 }
 
 .duration {
@@ -54,10 +91,22 @@
   pointer-events: none;
 }
 
+.labelDraft {
+  position: absolute;
+  top: 0;
+  left: 42px;
+  padding: 1px 6px 2px 6px;
+  background-color: #e37433;
+  color: white;
+  font-size: 7px;
+  border-radius: 0 0 3px 3px;
+  user-select: none;
+}
+
 .btnEditStep {
   cursor: pointer;
   font-size: 15px;
-  z-index: 20;
+  z-index: 5;
   color: white;
   margin-right: 8px;
 }

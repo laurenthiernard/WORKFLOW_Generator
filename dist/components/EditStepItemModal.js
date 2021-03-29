@@ -1,1 +1,106 @@
-import t,{useState as m,useContext as F}from"../../web_modules/react.js";import d from"./SelectSearchable.js";import L from"../WorkflowContext.js";import a from"./EditStepItemModal.module.css.proxy.js";export default function T({viewportPosition:E,onUpdate:P,onClose:U,stepItemJson:p,stepItemJson:{Title:b,WorkFlowTemplateStepItemMemberPositionRoles:I,WorkFlowTemplateStepItemUsers:C}}){const N=I[0]?[{label:I[0].MemberPositionRoleName}]:[],[r,M]=m(b),[n,R]=m(N),[u,S]=m(C.filter(e=>e.IsInactive===!1)),[c,f]=m(C.filter(e=>e.IsCC===!0)),s=F(L),_=s?.currentWorkflow?.StepsDelegationOfAuthorityDependant,D=new Intl.NumberFormat("en-US",{style:"currency",currency:"USD"});function w(e){switch(e.target.id){case"title":M(e.target.value);break;case"role":R(e.target.value);break;case"rules":const i=e.target.selectedIndex;default:break}}function h(e){let i=u.map(l=>{const o=c.some(y=>l.UserGUID===y.UserGUID);return{...l,IsCC:o}});const $=c.filter(l=>!i.map(o=>o.UserGUID).includes(l.UserGUID)).map(l=>({...l,IsCC:!0,IsInactive:!0})),g=[...i,...$].map(l=>{const o={...l};return delete o.label,o}),k=n[0]?[{MemberPositionRoleName:n[0].MemberPositionRoleName,MemberPositionRoleGUID:n[0].MemberPositionRoleGUID}]:[],x=_?{...p,Title:r,WorkFlowTemplateStepItemMemberPositionRoles:k}:{...p,Title:r,WorkFlowTemplateStepItemUsers:g};P(x),U()}function G(e){U()}return t.createElement(t.Fragment,null,t.createElement("div",{className:a.backdrop,onClick:G}),t.createElement("div",{className:a.EditStepItemModal_Container,style:{left:E.x,top:E.y}},t.createElement("div",{className:a.EditStepItemModal_Header},t.createElement("h1",null,"Edit Step Item")),t.createElement("div",{className:a.EditStepItemModal_Content},t.createElement("div",{className:a.EditStepItemModal_Content_Row},t.createElement("h3",null,"Title"),t.createElement("input",{type:"text",name:"title",id:"title",className:a.title,value:r,onChange:w})),_&&t.createElement("div",{className:a.EditStepItemModal_Content_Row},t.createElement("h3",null,"Role"),t.createElement(d,{items:s?.doa.map(e=>({label:`${e.MemberPositionRoleName} | [${e.DelegatedValue?D.format(e.DelegatedValue).replace(/\D00(?=\D*$)/,""):"undefined"}]`,MemberPositionRoleName:e.MemberPositionRoleName,MemberPositionRoleGUID:e.MemberPositionRoleGUID})),selectedItems:[...n],allowMultiple:!1,width:"l",onSelectItem:e=>R(e)})),!_&&t.createElement(t.Fragment,null,t.createElement("div",{className:a.EditStepItemModal_Content_Row},t.createElement("h3",null,"Particpants"),t.createElement(d,{items:s?.contacts.map(e=>({label:`${e.Contact.NameFirst} ${e.Contact.NameLast}`,ContactName:`${e.Contact.NameFirst} ${e.Contact.NameLast}`,UserGUID:e.User.GUID})),allowMultiple:!0,width:"l",selectedItems:[...u].map(e=>({...e,label:e.ContactName})),onSelectItem:e=>S(e)})),t.createElement("div",{className:a.EditStepItemModal_Content_Row},t.createElement("h3",null,"Cc"),t.createElement(d,{items:s?.contacts.map(e=>({label:`${e.Contact.NameFirst} ${e.Contact.NameLast}`,ContactName:`${e.Contact.NameFirst} ${e.Contact.NameLast}`,UserGUID:e.User.GUID})),allowMultiple:!0,width:"l",selectedItems:[...c].map(e=>({...e,label:e.ContactName})),onSelectItem:e=>f(e)})))),t.createElement("div",{className:a.EditStepItemModal_Footer},t.createElement("button",{className:`btn ${a.EditStepItemModal_btnOK}`,onClick:h},"OK"))))}
+import React, {useState, useContext} from "../../_snowpack/pkg/react.js";
+import SelectSearchable from "./SelectSearchable.js";
+import WorkflowContext from "../WorkflowContext.js";
+import styles from "./EditStepItemModal.module.css.proxy.js";
+export default function EditStepItemModal({viewportPosition, onUpdate, onClose, stepItemJson, stepItemJson: {Title, WorkFlowTemplateStepItemMemberPositionRoles, WorkFlowTemplateStepItemUsers}}) {
+  const roleValue = WorkFlowTemplateStepItemMemberPositionRoles[0] ? [{label: WorkFlowTemplateStepItemMemberPositionRoles[0].MemberPositionRoleName, MemberPositionRoleGUID: WorkFlowTemplateStepItemMemberPositionRoles[0].MemberPositionRoleGUID}] : [];
+  const [title, setTitle] = useState(Title);
+  const [role, setRole] = useState(roleValue);
+  const [contacts, setContacts] = useState(WorkFlowTemplateStepItemUsers.filter((contact) => contact.IsInactive === false));
+  const [ccContactList, setCcContactList] = useState(WorkFlowTemplateStepItemUsers.filter((contact) => contact.IsCC === true));
+  const context = useContext(WorkflowContext);
+  const isDOADependant = context?.currentWorkflow?.StepsDelegationOfAuthorityDependant;
+  const moneyFormatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD"
+  });
+  function changeHandler(pEvent) {
+    switch (pEvent.target.id) {
+      case "title":
+        setTitle(pEvent.target.value);
+        break;
+      case "role":
+        setRole(pEvent.target.value);
+        break;
+      case "rules":
+        const selectedIndex = pEvent.target.selectedIndex;
+      default:
+        break;
+    }
+  }
+  function submitEditStepItemHandler(pEvent) {
+    let updatedContactList = contacts.map((contact) => {
+      const isCC = ccContactList.some((ccContact) => contact.UserGUID === ccContact.UserGUID);
+      return {...contact, IsCC: isCC, IsInactive: false};
+    });
+    const ccContactsToAdd = ccContactList.filter((ccContact) => {
+      return !updatedContactList.map((contact) => contact.UserGUID).includes(ccContact.UserGUID);
+    }).map((ccContact) => ({...ccContact, IsCC: true, IsInactive: true}));
+    const stepItemUsers = [...updatedContactList, ...ccContactsToAdd].map((contact) => {
+      const newContact = {...contact};
+      delete newContact.label;
+      return newContact;
+    });
+    const workFlowTemplateStepItemMemberPositionRolesValue = role[0] ? [{MemberPositionRoleName: role[0].label, MemberPositionRoleGUID: role[0].MemberPositionRoleGUID}] : [];
+    const stepItemToUpdate = isDOADependant ? {...stepItemJson, Title: title, WorkFlowTemplateStepItemMemberPositionRoles: workFlowTemplateStepItemMemberPositionRolesValue} : {...stepItemJson, Title: title, WorkFlowTemplateStepItemUsers: stepItemUsers};
+    onUpdate(stepItemToUpdate);
+    onClose();
+  }
+  function clickCloseHandler(pEvent) {
+    onClose();
+  }
+  return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("div", {
+    className: styles.backdrop,
+    onClick: clickCloseHandler
+  }), /* @__PURE__ */ React.createElement("div", {
+    className: styles.EditStepItemModal_Container,
+    style: {left: viewportPosition.x, top: viewportPosition.y}
+  }, /* @__PURE__ */ React.createElement("div", {
+    className: styles.EditStepItemModal_Header
+  }, /* @__PURE__ */ React.createElement("h1", null, "Edit Step Item")), /* @__PURE__ */ React.createElement("div", {
+    className: styles.EditStepItemModal_Content
+  }, /* @__PURE__ */ React.createElement("div", {
+    className: styles.EditStepItemModal_Content_Row
+  }, /* @__PURE__ */ React.createElement("h3", null, "Title"), /* @__PURE__ */ React.createElement("input", {
+    type: "text",
+    name: "title",
+    id: "title",
+    className: styles.title,
+    value: title,
+    onChange: changeHandler
+  })), isDOADependant && /* @__PURE__ */ React.createElement("div", {
+    className: styles.EditStepItemModal_Content_Row
+  }, /* @__PURE__ */ React.createElement("h3", null, "Role"), /* @__PURE__ */ React.createElement(SelectSearchable, {
+    items: context?.doa.map((value) => ({label: `${value.MemberPositionRoleName} | [${value.DelegatedValue ? moneyFormatter.format(value.DelegatedValue).replace(/\D00(?=\D*$)/, "") : "undefined"}]`, MemberPositionRoleName: value.MemberPositionRoleName, MemberPositionRoleGUID: value.MemberPositionRoleGUID})),
+    selectedItems: [...role],
+    allowMultiple: false,
+    width: "l",
+    onSelectItem: (item) => setRole(item)
+  })), !isDOADependant && /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("div", {
+    className: styles.EditStepItemModal_Content_Row
+  }, /* @__PURE__ */ React.createElement("h3", null, "Particpants"), /* @__PURE__ */ React.createElement(SelectSearchable, {
+    items: context?.contacts.map((value) => ({label: `${value.Contact.NameFirst} ${value.Contact.NameLast}`, ContactName: `${value.Contact.NameFirst} ${value.Contact.NameLast}`, UserGUID: value.User.GUID})),
+    allowMultiple: true,
+    width: "l",
+    deleteMode: "keep",
+    selectedItems: [...contacts].filter((activeContact) => !activeContact.IsDeleted === true).map((contact) => {
+      return {...contact, label: contact.ContactName};
+    }),
+    onSelectItem: (item) => setContacts(item)
+  })), /* @__PURE__ */ React.createElement("div", {
+    className: styles.EditStepItemModal_Content_Row
+  }, /* @__PURE__ */ React.createElement("h3", null, "Cc"), /* @__PURE__ */ React.createElement(SelectSearchable, {
+    items: context?.contacts.map((value) => ({label: `${value.Contact.NameFirst} ${value.Contact.NameLast}`, ContactName: `${value.Contact.NameFirst} ${value.Contact.NameLast}`, UserGUID: value.User.GUID})),
+    allowMultiple: true,
+    width: "l",
+    selectedItems: [...ccContactList].map((contact) => {
+      return {...contact, label: contact.ContactName, ContactName: contact.ContactName};
+    }),
+    onSelectItem: (item) => setCcContactList(item)
+  })))), /* @__PURE__ */ React.createElement("div", {
+    className: styles.EditStepItemModal_Footer
+  }, /* @__PURE__ */ React.createElement("button", {
+    className: `btn ${styles.EditStepItemModal_btnOK}`,
+    onClick: submitEditStepItemHandler
+  }, "OK"))));
+}
