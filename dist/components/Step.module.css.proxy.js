@@ -4,6 +4,21 @@ export let code=`._dist_components_Step_module__StepContainer {
   flex: 1 0 auto;
   border: 1px solid #dfdfdf;
 }
+._dist_components_Step_module__StepContainer ._dist_components_Step_module__StepItem {
+  background: url(./connectors.png) no-repeat scroll 0 0;
+}
+._dist_components_Step_module__StepContainer ._dist_components_Step_module__StepItem._dist_components_Step_module__top {
+  background-position: 2px -42%;
+}
+._dist_components_Step_module__StepContainer ._dist_components_Step_module__StepItem._dist_components_Step_module__mid {
+  background-position: 2px 51%;
+}
+._dist_components_Step_module__StepContainer ._dist_components_Step_module__StepItem._dist_components_Step_module__bot {
+  background-position: 2px 142%;
+}
+._dist_components_Step_module__StepContainer ._dist_components_Step_module__StepItem._dist_components_Step_module__sin {
+  background: transparent url(./greypix.png) repeat-x scroll center center;
+}
 ._dist_components_Step_module__StepHeader {
   position: relative;
   display: flex;
@@ -21,8 +36,11 @@ export let code=`._dist_components_Step_module__StepContainer {
   flex: 1 0 auto;
   align-items: center;
   justify-content: center;
-  padding: 12px 6px;
+  padding: 12px 0px;
   transition: all 0.25s ease-out;
+}
+._dist_components_Step_module__StepContentEnd {
+  height: 100%;
 }
 ._dist_components_Step_module__StepStart {
   flex: 0 0 120px;
@@ -31,6 +49,25 @@ export let code=`._dist_components_Step_module__StepContainer {
 ._dist_components_Step_module__StepEnd {
   flex: 1 0 auto;
   min-width: 200px;
+}
+
+._dist_components_Step_module__startBG {
+  position: relative;
+  right: -45px;
+  width: 90px;
+  height: 20px;
+  background: transparent url(./markers.png) no-repeat left calc(50% - 0.5px);
+}
+
+._dist_components_Step_module__endBG {
+  position: relative;
+  top: calc(50% - 1px);
+  transform: translateY(-50%);
+  left: -32px;
+  width: 90px;
+  height: 32px;
+  background: transparent url(./markers.png) no-repeat right center;
+  background-attachment: scroll;
 }
 
 ._dist_components_Step_module__duration {
@@ -84,4 +121,4 @@ export let code=`._dist_components_Step_module__StepContainer {
 }
 ._dist_components_Step_module__btnRemoveStep:hover {
   color: #f1f1f1;
-}`;let n={StepContainer:"_dist_components_Step_module__StepContainer",StepHeader:"_dist_components_Step_module__StepHeader",StepContent:"_dist_components_Step_module__StepContent",StepStart:"_dist_components_Step_module__StepStart",StepEnd:"_dist_components_Step_module__StepEnd",duration:"_dist_components_Step_module__duration",title:"_dist_components_Step_module__title",hovered:"_dist_components_Step_module__hovered",labelDraft:"_dist_components_Step_module__labelDraft",btnEditStep:"_dist_components_Step_module__btnEditStep",btnRemoveStep:"_dist_components_Step_module__btnRemoveStep"};export default n;const e=document.createElement("style"),t=document.createTextNode(code);e.type="text/css",e.appendChild(t),document.head.appendChild(e);
+}`;let e={StepContainer:"_dist_components_Step_module__StepContainer",StepItem:"_dist_components_Step_module__StepItem",top:"_dist_components_Step_module__top",mid:"_dist_components_Step_module__mid",bot:"_dist_components_Step_module__bot",sin:"_dist_components_Step_module__sin",StepHeader:"_dist_components_Step_module__StepHeader",StepContent:"_dist_components_Step_module__StepContent",StepContentEnd:"_dist_components_Step_module__StepContentEnd",StepStart:"_dist_components_Step_module__StepStart",StepEnd:"_dist_components_Step_module__StepEnd",startBG:"_dist_components_Step_module__startBG",endBG:"_dist_components_Step_module__endBG",duration:"_dist_components_Step_module__duration",title:"_dist_components_Step_module__title",hovered:"_dist_components_Step_module__hovered",labelDraft:"_dist_components_Step_module__labelDraft",btnEditStep:"_dist_components_Step_module__btnEditStep",btnRemoveStep:"_dist_components_Step_module__btnRemoveStep"};export default e;const n=document.createElement("style"),t=document.createTextNode(code);n.type="text/css",n.appendChild(t),document.head.appendChild(n);
