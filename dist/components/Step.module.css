@@ -4,21 +4,6 @@
   flex: 1 0 auto;
   border: 1px solid #dfdfdf;
 }
-.StepContainer .StepItem {
-  background: url(./connectors.png) no-repeat scroll 0 0;
-}
-.StepContainer .StepItem.top {
-  background-position: 2px -42%;
-}
-.StepContainer .StepItem.mid {
-  background-position: 2px 51%;
-}
-.StepContainer .StepItem.bot {
-  background-position: 2px 142%;
-}
-.StepContainer .StepItem.sin {
-  background: transparent url(./greypix.png) repeat-x scroll center center;
-}
 .StepHeader {
   position: relative;
   display: flex;
@@ -36,11 +21,8 @@
   flex: 1 0 auto;
   align-items: center;
   justify-content: center;
-  padding: 12px 0px;
+  padding: 12px 6px;
   transition: all 0.25s ease-out;
-}
-.StepContentEnd {
-  height: 100%;
 }
 .StepStart {
   flex: 0 0 120px;
@@ -49,25 +31,6 @@
 .StepEnd {
   flex: 1 0 auto;
   min-width: 200px;
-}
-
-.startBG {
-  position: relative;
-  right: -45px;
-  width: 90px;
-  height: 20px;
-  background: transparent url(./markers.png) no-repeat left calc(50% - 0.5px);
-}
-
-.endBG {
-  position: relative;
-  top: calc(50% - 1px);
-  transform: translateY(-50%);
-  left: -32px;
-  width: 90px;
-  height: 32px;
-  background: transparent url(./markers.png) no-repeat right center;
-  background-attachment: scroll;
 }
 
 .duration {
