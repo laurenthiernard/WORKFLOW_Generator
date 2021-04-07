@@ -52,6 +52,9 @@ a:visited {
   outline: none;
   cursor: pointer;
 }
+.btn svg {
+  margin-right: 6px;
+}
 .btn:hover {
   background-color: darkgrey;
 }

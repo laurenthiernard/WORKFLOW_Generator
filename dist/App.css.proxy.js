@@ -52,6 +52,9 @@ a:visited {
   outline: none;
   cursor: pointer;
 }
+.btn svg {
+  margin-right: 6px;
+}
 .btn:hover {
   background-color: darkgrey;
 }
@@ -106,6 +109,12 @@ a:visited {
 }
 .actionBtns #showJson {
   margin-left: 36px;
+}
+
+.actionMsgs {
+  padding: 6px 12px 0 12px;
+  font-size: 12px;
+  color: #e37433;
 }
 
 .controls {

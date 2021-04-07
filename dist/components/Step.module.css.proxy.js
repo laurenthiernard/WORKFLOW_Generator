@@ -21,13 +21,10 @@ export let code=`._dist_components_Step_module__StepContainer {
 }
 ._dist_components_Step_module__StepHeader {
   position: relative;
-  display: flex;
-  align-items: center;
   white-space: nowrap;
-  justify-content: space-between;
   background-color: #5e94c0;
   color: snow;
-  padding: 2px 12px 2px 12px;
+  padding: 14px 12px 2px 12px;
   min-height: 38px;
 }
 ._dist_components_Step_module__StepContent {
@@ -70,20 +67,6 @@ export let code=`._dist_components_Step_module__StepContainer {
   background-attachment: scroll;
 }
 
-._dist_components_Step_module__duration {
-  display: flex;
-  font-weight: bold;
-  color: snow;
-  padding: 4px 0;
-  margin: 0 12px;
-  align-items: center;
-}
-
-._dist_components_Step_module__title {
-  min-width: 80px;
-  margin-left: 8px;
-}
-
 ._dist_components_Step_module__hovered {
   background-color: rgba(231, 231, 231, 0.5);
 }
@@ -91,34 +74,63 @@ export let code=`._dist_components_Step_module__StepContainer {
   pointer-events: none;
 }
 
-._dist_components_Step_module__labelDraft {
-  position: absolute;
-  top: 0;
-  left: 42px;
-  padding: 1px 6px 2px 6px;
-  background-color: #e37433;
-  color: white;
-  font-size: 7px;
-  border-radius: 0 0 3px 3px;
-  user-select: none;
-}
-
 ._dist_components_Step_module__btnEditStep {
+  display: inline-block;
+  overflow: hidden;
   cursor: pointer;
   font-size: 15px;
   z-index: 5;
   color: white;
-  margin-right: 8px;
 }
 ._dist_components_Step_module__btnEditStep:hover {
   color: #f0e9e9;
 }
 
+._dist_components_Step_module__title {
+  width: 150px;
+  display: inline-block;
+  margin-left: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+._dist_components_Step_module__labelDraft {
+  position: absolute;
+  top: 0;
+  left: 92px;
+  padding: 1px 6px 2px 6px;
+  background-color: #e37433;
+  color: white;
+  font-size: 8px;
+  border-radius: 0 0 3px 3px;
+  user-select: none;
+}
+
+._dist_components_Step_module__duration {
+  position: absolute;
+  top: 0px;
+  left: 38px;
+  padding: 1px 6px 2px 6px;
+  background-color: #4981af;
+  color: snow;
+  font-size: 8px;
+  border-radius: 0 0 3px 3px;
+  user-select: none;
+  text-transform: uppercase;
+}
+._dist_components_Step_module__durationValue {
+  font-weight: bold;
+  color: white;
+}
+
 ._dist_components_Step_module__btnRemoveStep {
-  font-size: 15px;
+  position: absolute;
+  top: 17px;
+  right: 8px;
+  font-size: 14px;
   color: white;
   cursor: pointer;
 }
 ._dist_components_Step_module__btnRemoveStep:hover {
   color: #f1f1f1;
-}`;let e={StepContainer:"_dist_components_Step_module__StepContainer",StepItem:"_dist_components_Step_module__StepItem",top:"_dist_components_Step_module__top",mid:"_dist_components_Step_module__mid",bot:"_dist_components_Step_module__bot",sin:"_dist_components_Step_module__sin",StepHeader:"_dist_components_Step_module__StepHeader",StepContent:"_dist_components_Step_module__StepContent",StepContentEnd:"_dist_components_Step_module__StepContentEnd",StepStart:"_dist_components_Step_module__StepStart",StepEnd:"_dist_components_Step_module__StepEnd",startBG:"_dist_components_Step_module__startBG",endBG:"_dist_components_Step_module__endBG",duration:"_dist_components_Step_module__duration",title:"_dist_components_Step_module__title",hovered:"_dist_components_Step_module__hovered",labelDraft:"_dist_components_Step_module__labelDraft",btnEditStep:"_dist_components_Step_module__btnEditStep",btnRemoveStep:"_dist_components_Step_module__btnRemoveStep"};export default e;const n=document.createElement("style"),t=document.createTextNode(code);n.type="text/css",n.appendChild(t),document.head.appendChild(n);
+}`;let e={StepContainer:"_dist_components_Step_module__StepContainer",StepItem:"_dist_components_Step_module__StepItem",top:"_dist_components_Step_module__top",mid:"_dist_components_Step_module__mid",bot:"_dist_components_Step_module__bot",sin:"_dist_components_Step_module__sin",StepHeader:"_dist_components_Step_module__StepHeader",StepContent:"_dist_components_Step_module__StepContent",StepContentEnd:"_dist_components_Step_module__StepContentEnd",StepStart:"_dist_components_Step_module__StepStart",StepEnd:"_dist_components_Step_module__StepEnd",startBG:"_dist_components_Step_module__startBG",endBG:"_dist_components_Step_module__endBG",hovered:"_dist_components_Step_module__hovered",btnEditStep:"_dist_components_Step_module__btnEditStep",title:"_dist_components_Step_module__title",labelDraft:"_dist_components_Step_module__labelDraft",duration:"_dist_components_Step_module__duration",durationValue:"_dist_components_Step_module__durationValue",btnRemoveStep:"_dist_components_Step_module__btnRemoveStep"};export default e;const n=document.createElement("style"),t=document.createTextNode(code);n.type="text/css",n.appendChild(t),document.head.appendChild(n);
