@@ -6,7 +6,6 @@
     "react-dom": "./react-dom.js",
     "react-json-view": "./react-json-view.js",
     "react-spinners/SquareLoader": "./react-spinners/SquareLoader.js",
-    "react-spring": "./react-spring.js",
     "uuid": "./uuid.js"
   }
 }
