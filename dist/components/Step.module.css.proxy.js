@@ -25,6 +25,7 @@ export let code=`._dist_components_Step_module__StepContainer {
   background-color: #5e94c0;
   color: snow;
   padding: 14px 12px 2px 12px;
+  height: 38px;
   min-height: 38px;
 }
 ._dist_components_Step_module__StepContent {
