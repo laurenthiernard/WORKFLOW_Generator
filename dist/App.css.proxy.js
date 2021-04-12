@@ -140,7 +140,7 @@ a:visited {
 .react-json-view {
   margin-top: 3rem;
   padding: 2rem;
-  height: 600px;
+  height: 800px;
   overflow-y: scroll;
 }
 
